@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+{% block content %}
+  <h1>Get Zoom Access Token</h1>
+  {% if request.method == 'POST' and response.status_code == 200 %}
+    <p>Access Token obtained successfully. Redirecting to the Zoom Meeting Link Generator...</p>
+  {% elif request.method == 'POST' and response.status_code != 200 %}
+    <p>Failed to obtain access token. Error: {{ response.status_code }}, {{ response.text }}</p>
+  {% else %}
+    <form method="post" action="{% url 'get_zoom_access_token' %}">
+      {% csrf_token %}
+      <label for="authorization_code">Zoom Authorization Code:</label>
+      <input type="text" name="code" required>
+      <button type="submit">Get Access Token</button>
+    </form>
+  {% endif %}
+{% endblock %}
+</body>
+</html>

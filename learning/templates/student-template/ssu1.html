@@ -1,0 +1,194 @@
+{% extends 'student-template/student_sidebar.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+
+        .mn {
+            border: 1px solid cyan;
+            box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.18);
+            border-radius: 10px;
+            padding-top: 2%;
+            padding-left: 8%;
+            margin-top: 7px;
+        }
+        body {
+            box-sizing: border-box;
+        }
+        .buttoncolor {
+            background: #001e4d;
+            color: #fff;
+            font-weight: 500;
+            width: 150px;
+            border: 0;
+            padding: 10px;
+            margin: 20px auto 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .qn {
+            display: none;
+        }
+        #timer { 
+            border-radius: 5px;
+            color: blue;
+        }
+        .high{
+            box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.18);
+            background-color: white;
+            height: 80px;
+            margin-top: -30px;
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    
+<form method="post" enctype="multipart/form-data" id="examForm">{% csrf_token %}
+   
+
+    <div class="row  high">
+        <div class="col-9">
+        </div>
+        <div class="col-3 ">
+            <div id="timer" style="display: flex;"><i class="bi bi-alarm mr-3"></i>
+
+                <!-- <div id="countdown" > {{ mn.0.houres }} <span>:</span>
+                    {{ mn.0.minutes }} <span>:</span>
+                    {{ mn.0.seconds }}
+                </div> -->
+                <div id="countdown" >
+                    {% for i in mn %}
+                    {% if forloop.last %}
+                    {{ i.houres }} <span>:</span>
+                    {{ i.minutes }} <span>:</span>                
+                    {{ i.seconds }}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                    <button type="submit" class="ml-4 btn btn-primary"  id="submitButton">Submit</button>
+                </div>
+            
+             </div>
+        </div>
+   
+
+    <div class="row" style="margin-top: 8%;">
+
+        <div class="col-2" style="padding-top: 8%;">
+        </div>
+
+        <div class="col-6">
+
+            {% for i in obb %}
+            
+            <div class="question" id="question{{ forloop.counter }}" style="{% if forloop.counter != 1 %}display: none;{% endif %}">
+                    <h5 name="question[]" value="{{ i.question }}" style="font-weight: bold;">Q{{ forloop.counter }}.{{ i.question | safe }}</h5>
+                <div class="mn">
+                    <input type="radio" name="answer{{ i.id }}" value="{{ i.choice1 }}">
+                   <p>{{ i.choice1 | safe }}</p> 
+                </div>
+                <div class="mn">
+                    <input type="radio" name="answer{{ i.id }}" value="{{ i.choice2 }}">
+                    <p>{{ i.choice2 | safe }}</p>
+                </div>
+                <div class="mn">
+                    <input type="radio" name="answer{{ i.id }}" value="{{ i.choice3 }}">
+                    {{ i.choice3 | safe }}
+                </div>
+                <div class="mn">
+                    <input type="radio" name="answer{{ i.id }}" value="{{ i.choice4 }}">
+                    {{ i.choice4 | safe }}
+                </div>
+
+            </div>
+
+            {% endfor %}
+            
+        </div>
+
+        <div class="col-4">    
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-8">
+            <button type="button" class="buttoncolor" onclick="previousQuestion()">Previous</button>
+            <button type="button" class="buttoncolor" onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+   
+</form>
+
+<script>
+    var currentQuestion = 1;
+    var totalQuestions = {{ obb|length }};
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            document.getElementById('question' + currentQuestion).style.display = 'none';
+            currentQuestion++;
+            document.getElementById('question' + currentQuestion).style.display = 'block';
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('submitButton').style.display = 'block';
+            }
+        }
+    }
+    function previousQuestion() {
+        if (currentQuestion > 1) {
+            document.getElementById('question' + currentQuestion).style.display = 'none';
+            currentQuestion--;
+            document.getElementById('question' + currentQuestion).style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    function updateTimer() {
+        var hours = parseInt(document.getElementById('countdown').textContent.split(':')[0]);
+        var minutes = parseInt(document.getElementById('countdown').textContent.split(':')[1]);
+        var seconds = parseInt(document.getElementById('countdown').textContent.split(':')[2]);
+
+        if (seconds > 0) {
+            seconds--;
+        } else {
+            if (minutes > 0) {
+                minutes--;
+                seconds = 59;
+            } else {
+                if (hours > 0) {
+                    hours--;
+                    minutes = 59;
+                    seconds = 59;
+                } else {
+
+                    document.getElementById('examForm').submit();
+                }
+            }
+        }
+        document.getElementById('countdown').textContent =
+            (hours < 10 ? '0' : '') + hours + ' : ' +
+            (minutes < 10 ? '0' : '') + minutes + ' : ' +
+            (seconds < 10 ? '0' : '') + seconds;
+    }
+
+    setInterval(updateTimer, 1000);
+    
+</script>
+
+</body>
+</html>
+
+{% endblock main_content %}

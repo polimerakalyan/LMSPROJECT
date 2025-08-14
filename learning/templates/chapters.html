@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <style>
+           
+            /* .hr{
+                width: 90%;
+                height: 1px;
+                background-color:rgb(116, 110, 110);
+            } */
+            .container{
+                margin-top: 100px;
+                margin-left: 250px;
+                border: 2px solid black;
+                width: 60%;
+            }
+            h2{
+                padding-left: 30px;
+            }
+            a{
+                text-decoration: none;
+            }
+                   </style>
+    </head>
+    
+
+
+
+
+    </table>
+     <body>
+        <div class="container">
+        <h2>Chapter wise names</h2>
+            
+        {% for i in subchapters %}
+
+        <ul >
+
+            <a href="/upload_2/{{i.id}}/" style="color:blue">  {{i.chapter_no}}-&nbsp;&nbsp;{{i.subjectname}}</a>
+            <!-- <a href="/descriptions/{{i.id}}/" style="color:blue">  {{i.chapter_no}}-&nbsp;&nbsp;{{i.subjectname}}</a>  -->
+               </ul>
+               {% endfor %}
+</div>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% for i in k0 %}
+        <h4>{{i.class_name.classes}}{{i.subject.name}}                                    
+            <a href="{% url 'Set_quiz' i.id %}" >Enable</a>
+            <a href="{% url 'Not_set_quiz' i.id %}" >Disable</a>
+
+        </h4>
+
+        {% endfor %}
+    </body>
+</html>

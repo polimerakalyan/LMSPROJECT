@@ -1,0 +1,100 @@
+<html>
+    <head>
+         <title>display</title>
+         <meta charset="UTF-8">             
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style>
+             a{
+                 text-decoration:none;
+                 color:black;
+                 
+             }
+             h1{
+                 text-shadow:3px 3px ;
+             }       
+         </style>
+  </head>
+
+  <body>
+    <nav class="navbar " style="background-color: #7a6ad8;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="background-color: white; border-radius: 5px; padding: 4px;" href="/home">LMS</a>
+        </div>        
+        <div class="collapse navbar-collapse" id="myNavbar">                        
+        </div>
+      </div>
+    </nav>
+      <br>
+<!--   
+    <nav class="navbar " style="background-color: #7a6ad8;">
+
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          
+          <a class="navbar-brand" style="background-color: white; border-radius: 5px; padding: 4px;" href="#">LMS</a>
+
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">    
+
+        </div>
+
+      </div>
+
+    </nav>
+
+    <br> -->
+
+  <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-1"></div>
+
+        <div class="col-8">
+
+          <table class="table table-bordered">
+
+            <tr>
+
+              <th style="text-align: center; background-color:#7a6ad8" > Subjects List</th>
+
+            </tr> 
+
+            {% for i in res %} 
+
+            {% if i.subjects %}   
+
+            <tr>               
+              
+              <th><a href="/subject/{{i.subid}}" style="text-decoration: none; color:rgb(58, 127, 207)">{{i.subjects}}</a></th>
+            
+            </tr> 
+
+            {% else %}
+
+            {% endif %}  
+
+            {% endfor %} 
+
+          </table>      
+          
+        </div>
+        
+        <div class="col-3">
+        
+        </div>
+      
+      </div>
+    
+    </div>       
+  
+  </body>
+
+</html>

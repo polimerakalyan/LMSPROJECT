@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Staff Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        table {
+            width: 60%;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd; /* Add borders to table cells */
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        img {
+            max-width: 20%;
+            height: auto;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        {% comment %} a {
+            margin-right: 72%;
+            text-decoration: none;
+            color: #333;
+        } {% endcomment %}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('form').submit(function(e){
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response){
+                        alert("Staff data updated successfully!");
+                        window.location.href = "{% url 'display_staff' %}";
+                    },
+                    error: function(xhr, status, error){
+                        alert("An error occurred while updating staff data.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <center><h1>EDIT STAFF DATA</h1></center>
+    
+    <form method="post" action="{% url 'edit_staff' pk=data.pk %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Heading</th>
+                <th>Image</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="heading" value="{{ data.heading }}">
+                </td>
+                <td>
+                    {% if data.image %}
+                        <img src="{{ data.image.url }}" alt="Current Image">
+                        <br>
+                        <input type="file" name="image">
+                    {% else %}
+                        No Image
+                        <br>
+                        <input type="file" name="image">
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+
+        <button style="margin-left:20%;" type="submit">Update</button><br>
+    </form>
+    <br>
+    <a style="margin-right:50%;" href="{% url 'display_staff' %}">Back to Staff Data</a>
+</body>
+</html>

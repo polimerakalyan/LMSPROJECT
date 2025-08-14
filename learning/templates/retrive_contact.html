@@ -1,0 +1,87 @@
+{% extends 'hom4.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          h1 {
+        background-color: #f0f0f0;
+        color: #333;
+        font-size: 24px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+       
+    }
+
+    li {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 20px;
+        
+    } */
+
+    /* Typography */
+    h4 {
+        color: #333;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #666;
+        font-size: 20px;
+        margin-bottom: 10px;
+       
+    }
+
+    .reply-button {
+        background-color: #007bff;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 10px;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .reply-button:hover {
+        background-color: #0056b3;
+        color: #ffffff;
+    }
+</style>
+
+</head>
+<body>
+    <h1>Contact Messages</h1>
+    <ul>
+        {% for message in contact_messages %}
+        <li>
+            <h4>{{ message.name }}</h4>
+            <p>{{ message.email }}</p>
+            <p>{{ message.subject }}</p>
+            <p>{{ message.message }}</p>
+            <p>{{ message.timestamp }}</p>
+            <a href="{% url 'reply_message' message.id %}" class="reply-button">Reply</a>
+         
+
+        </li>
+        {% endfor %}
+    </ul>
+     
+</body>
+</html>
+{% endblock main_content %}

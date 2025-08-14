@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4>Subject And Chapter Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" >{% csrf_token %}
+                            <div class="form-group">
+                                <label>subjects</label>
+                                <input type="text" name="subjects" class="form-control" >
+                                <label>intro</label>
+                                <input type="text" name="intro" class="form-control">
+                                <label>description</label>
+                                <input type="text" name="description" class="form-control">
+                                <label>subid</label>
+                                <input type="text" name="subid" class="form-control">
+                                <label>chaptername</label>
+                                <input type="text" name="chaptername" class="form-control"> 
+                                <label>chapterdiscription</label>
+                                <input type="text" name="chapterdis" class="form-control"> 
+                                <label for="pdf">Choose PDF File:</label>
+                                <input type="file" name="pdf" accept=".pdf" class="form-control">
+
+                                <label>class</label>
+                                <input type="text" name="classes" class="form-control"> 
+                                <label>classid</label>
+                                <input type="number" name="classid"  class="form-control">
+                                
+                                
+                            </div> 
+                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </form>        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

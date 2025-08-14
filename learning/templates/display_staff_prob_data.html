@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>Display Staff Problem Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>STAFF PROBLEM DATA</h1>
+    <table>
+        <tr>
+            <th>Heading</th>
+            <th>discription</th>
+            <th>p1</th>
+            <th>Actions</th>
+        </tr>
+        {% for problem in staff_prob_data %}
+            <tr>
+                <td>{{ problem.heading }}</td>
+                <td>{{ problem.discription }}</td>
+                <td>{{ problem.p1 }}</td>
+                <td>
+                    <a href="{% url 'edit_staff_prob_data' problem.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="{% url 'delete_staff_prob_data' problem.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

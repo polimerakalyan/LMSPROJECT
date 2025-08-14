@@ -1,0 +1,103 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Data</title>
+</head>
+<style>
+.responsive-table-container {
+  width: 100%; /* Ensures table adapts to container width */
+}
+
+.responsive-table-container h1 {
+  font-size: 22px;
+  color: blueviolet;
+  text-align: center; /* Center align heading text */
+}
+
+.tabledata {
+  overflow-x: auto; /* Enable horizontal scroll for wider tables */
+}
+
+table {
+  width: 100%; /* Ensures table fills container width */
+  border-collapse: collapse; /* Removes borders between cells */
+}
+
+.table-header, .table-body {
+  background-color: #f2f2f2; /* Light gray background for rows */
+}
+
+.table-header {
+  font-size: 16px;
+  color: #333; /* Darker text color for header */
+  font-weight: bold; /* Bold text for header */
+}
+
+.table-body {
+  font-size: 14px;
+  color: #666; /* Lighter text color for body */
+}
+
+th, td {
+  padding: 10px; /* Add padding to cells */
+  border: 1px solid #ddd; /* Add borders to cells */
+}
+
+</style>
+<body>
+
+  <div class="responsive-table-container">
+  <h1><center>
+    {% for school in second_table_data %}
+      {{ school.organizationname }}
+    {% endfor %}
+  </center></h1>
+
+  <div class="tabledata">
+    <table>
+      <thead>
+        <tr class="table-header">
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Registration_date</th>
+          <th>Class</th>
+          <th>Gender</th>
+          <th>Mobile_number</th>
+          <th>Parents_name</th>
+          <th>Parents_mobile_number</th>
+          <th>Date_of_birth</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in plans %}
+        <tr class="table-body">
+          <td>{{ student.first_name }}</td>
+          <td>{{ student.last_name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.registration_date }}</td>
+          <td>{{ student.className }}</td>
+          <td>{{ student.gender }}</td>
+          <td>{{ student.mobile_number }}</td>
+          <td>{{ student.parents_name }}</td>
+          <td>{{ student.parents_mobile_number }}</td>
+          <td>{{ student.date_of_birth }}</td>
+          <td>{{ student.address }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if error %}
+  <p>Error: {{ error }}</p>
+{% endif %}
+
+</body>
+</html>
+{% endblock main_content %}

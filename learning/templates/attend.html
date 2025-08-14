@@ -1,0 +1,111 @@
+{% extends 'admin-template/adminsidebar.html' %}
+
+{% block main_content %}
+<div class="container">
+  <h1 class="heading">Class Dashboard</h1>
+  <p class="sub-heading">Explore the available classes</p>
+
+  <div class="animated-cards-container">
+
+    <div class="animated-cards">
+      {% for class_info in cl %}
+      <div class="animated-card">
+        <a href="{% url 'class_students' class_id=class_info.id %}">
+          <div class="animated-card-content">
+            <h2>{{ class_info.classes }}</h2>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0B3954; /* Deep blue */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    color: #fff;
+  }
+
+  .container {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .heading {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #4DB6AC; /* Turquoise */
+  }
+
+  .sub-heading {
+    font-size: 24px;
+    margin-bottom: 50px;
+    color: #81C784; /* Light green */
+  }
+
+  .animated-cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .animated-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .animated-card {
+    width: 200px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.2); /* Transparent white */
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .animated-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .animated-card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .animated-card-content .card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+  }
+
+  .animated-card-content h2 {
+    margin: 0;
+    font-size: 44px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .animated-card a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+
+{% endblock main_content %}

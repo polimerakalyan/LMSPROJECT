@@ -1,0 +1,75 @@
+<h1>Insert Your Model</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+    
+    <div class="form-group">
+        <label for="{{ form.organizationname.id_for_label }}">Organizationname:</label>
+        <input type="{{ form.organizationname.field.widget.input_type }}"
+               name="{{ form.organizationname.name }}"
+               class="form-control"
+               value="{{ form.organizationname.value }}">
+    </div>
+        <div class="form-group">
+        <label for="{{ form.registerrationno.id_for_label }}">Registration No:</label>
+        <input type="{{ form.registerrationno.field.widget.input_type }}"
+               name="{{ form.registerrationno.name }}"
+               class="form-control"
+               value="{{ form.registerrationno.value }}">
+    </div><br><br>
+    <div class="form-group">
+        <label for="{{ form.address.id_for_label }}">Address:</label>
+        <textarea name="{{ form.address.name }}"
+                  class="form-control"
+                  rows="4">{{ form.address.value }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="{{ form.hod.id_for_label }}">HOD:</label>
+        <input type="{{ form.hod.field.widget.input_type }}"
+               name="{{ form.hod.name }}"
+               class="form-control"
+               value="{{ form.hod.value }}">
+    </div><br><br>
+
+    <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">EMAIL:</label>
+        <input type="{{ form.email.field.widget.input_type }}"
+               name="{{ form.email.name }}"
+               class="form-control"
+               value="{{ form.email.value }}">
+    </div><br><br>
+
+    <div class="form-group">
+        <label for="{{ form.logo.id_for_label }}">Image:</label>
+        <input type="file"
+               name="{{ form.logo.name }}"
+               accept="image/*"
+               class="form-control-file"
+               id="{{ form.logo.id_for_label }}">
+        {% if form.logo.value %}
+            <img src="{{ form.logo.value.url }}" alt="Logo" style="max-width: 200px; max-height: 200px;">
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ phoneno.id_for_label }}">Phone no:</label>
+        <input type="{{ form.phoneno.field.widget.input_type }}"
+               name="{{ form.phoneno.name }}"
+               class="form-control"
+               value="{{ form.phoneno.value }}">
+    </div><br><br>
+
+    <div class="form-group">
+        <label for="{{ strength.id_for_label }}">Strength:</label>
+        <input type="{{ form.strength.field.widget.input_type }}"
+               name="{{ form.strength.name }}"
+               class="form-control"
+               value="{{ form.strength.value }}">
+    </div><br><br>
+
+
+
+
+    <button type="submit">Submit</button>
+</form>

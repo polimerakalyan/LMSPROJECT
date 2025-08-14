@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <title>data displaying</title>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+        <style>
+
+            body{
+                {% comment %} background-color:rgb(47, 83, 155); {% endcomment %}
+                text-align: left;
+                padding: 2%;
+                border-radius: 50%;
+
+
+
+            }
+            .card1:hover{
+                transform:scale(1.05)
+
+            }
+
+            #crd{
+                border:2px solid white;;
+                border-radius:25px;
+
+            }
+            #p1{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                margin: 90px;
+                /* width: 400px; */
+                margin-top: 30px;
+                margin-bottom: 30px;
+
+            }
+            #p2{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                margin-top: 30px;
+                margin-bottom: 30px;
+
+            }
+
+            #p3{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                
+
+            }
+
+
+
+            .card1{
+                /* border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                height:410px;
+                width: 450px;
+                margin-left: 25px;
+                margin-bottom: 5px; */
+                width: 490px; 
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin: 10px;
+                padding: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                
+
+            }
+
+            .morecontent span {
+                display: none;
+                overflow: hidden;
+                position: relative;
+                height: 120px; 
+              }
+              .morelink {
+                display: block;
+                color:lightcoral;
+              }
+         body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+
+               }
+          .card-container {
+              border: 1px solid #ccc;
+               border-radius: 15px; /* Adjust the border-radius value as needed */
+              margin-bottom: 20px;
+             height: auto;
+             padding: 10px;
+            transition: transform 0.3s;
+            }
+
+          .card {
+             border: 1px solid #ddd;
+            border-radius: 8px; /* Adjust the border-radius value as needed */
+            padding: 15px;
+            margin-bottom: 15px;
+         }
+            .card-container:hover {
+               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                transform:scale(1.05)
+            }
+
+
+
+
+  </style>
+  </head>
+<body>
+    <ul><center><h2>Timetable Management system </h2></center></ul>
+    <br>
+ <div>
+    {% for i in s %}
+    {% if i.image %}
+    <img src="{{i.image.url}}" width="100%" height="400px" id="crd">
+    {% else %}
+    {% endif %}
+    {% endfor %}
+    </div><br>
+
+<div class="container">
+  {% for i in k %}
+    <div class="row d-flex justify-content-center align-items-center card-container">
+      <div class="col-md-5">
+        <h3 style="color:red"><b>{{ i.title}}</b></h3><br>
+        <p style="text-align: justify; font-size: 18px;">{{ i.content}}</p>
+      </div>
+      <div class="col-md-5">
+        <img src="{{i.photo.url}}" width="450px" height="250px"  id="p1">
+      </div>
+    </div>
+    <br><br>
+    {% if i.photo1 %}
+      <div class="row d-flex justify-content-center align-items-center card-container">
+        <div class="col-md-5">
+          <img src="{{i.photo1.url}}" width="450px" height="250px" id="p2">
+        </div>
+        <div class="col-md-5">
+          <h3 style="color: red;"><b>{{ i.title1 }}</b></h3><br>
+          <p style="text-align: justify; font-size: 18px;">{{ i.content1}}</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+  <br>
+
+
+      <div class="container-fluid" >
+        <div class="row">
+          {% for i in c %}
+            <div class="col-md-4" style="margin-bottom: 20px;"> <!-- Added margin-bottom for space between cards -->
+              <div class="card1">
+                {% if i.cardphoto %}
+                  <center><img src="{{i.cardphoto.url}}" style="height: 200px; width: 300px; margin-top: 10px" id="p3"></center>
+                {% else %}
+                {% endif %}
+                <center><h3>
+                  <div class="more" style="color:red;">
+                    {{i.cardtitle}}
+                  </div>
+                </h3></center>
+               <center><div class="more" style="color:black; padding-left: 30px;">
+                  {{i.cardcontent}}
+                </div></center>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- <script>
+        $(document).ready(function() {
+        var showChar = 90;
+        var ellipsestext = "...";
+        var moretext = "Show more";
+        var lesstext = "Show less";
+        $('.more').each(function() {
+          var content = $(this).html();
+          if(content.length > showChar) {
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+            $(this).html(html);
+          }
+        });
+        $(".morelink").click(function(){
+          if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+          } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+          }
+          $(this).parent().prev().toggle();
+          $(this).prev().toggle();
+          return false;
+        });
+       });
+      </script> -->
+      <script>
+        $(document).ready(function() {
+          var showChar = 100; 
+          var ellipsestext = "...";
+          var moretext = "Show more";
+          var lesstext = "Show less";
+          $('.more').each(function() {
+            var content = $(this).html();
+            if(content.length > showChar) {
+              var c = content.substr(0, showChar);
+              var h = content.substr(showChar, content.length - showChar);
+              var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+              $(this).html(html);
+            }
+          });
+          $(".morelink").click(function(){
+            if($(this).hasClass("less")) {
+              $(this).removeClass("less");
+              $(this).html(moretext);
+            } else {
+              $(this).addClass("less");
+              $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+          });
+        });
+        </script>
+
+
+</body>
+</html>

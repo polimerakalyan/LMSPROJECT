@@ -1,0 +1,291 @@
+{% extends 'hom4.html' %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block main_content %}
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>Display Staff Features Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>STAFF FEATURES DATA</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Heading</th>
+            <th>Description</th>
+            <th>p1</th>
+            <th>Paragraph 2</th>
+            <th>Actions</th>
+        </tr>
+        {% for fea_member in fea_data %}
+            <tr>
+                <td>{{ fea_member.id }}</td>
+                <td>{{ fea_member.heading }}</td>
+                <td>{{ fea_member.discription }}</td>
+                <td>{{ fea_member.p1 }}</td>
+                <td>{{ fea_member.paragraph2 }}</td>
+                <td>
+                    <a href="{% url 'edit_fea_data' fea_member.id %}" style="margin-left:0px;">
+                        <i class="fas fa-edit"></i>|
+                    </a> 
+                    <a href="{% url 'delete_fea_data' fea_member.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h1>STAFF PROBLEM DATA</h1>
+    <table>
+        <tr>
+            <th>Heading</th>
+            <th>discription</th>
+            <th>p1</th>
+            <th>Actions</th>
+        </tr>
+        {% for problem in staff_prob_data %}
+            <tr>
+                <td>{{ problem.heading }}</td>
+                <td>{{ problem.discription }}</td>
+                <td>{{ problem.p1 }}</td>
+                <td>
+                    <a href="{% url 'edit_staff_prob_data' problem.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="{% url 'delete_staff_prob_data' problem.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>Staff Importance Data</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Main Heading</th>
+            <th>Image</th>
+            <th>Paragraph 1</th>
+            <th>Paragraph 2</th>
+            <th>Actions</th>
+
+        </tr>
+        {% for imp_member in staff_imp_data %}
+            <tr>
+                <td>{{ imp_member.id }}</td>
+                <td>{{ imp_member.main_heading }}</td>
+                <td>
+                    {% if imp_member.image %}
+                        <img src="{{ imp_member.image.url }}" alt="Staff Image" width="50">
+                    {% else %}
+                        No Image Available
+                    {% endif %}
+                </td>
+                <td>{{ imp_member.paragraph1 }}</td>
+                <td>{{ imp_member.paragraph2 }}</td>
+                <td>
+                    <a href="{% url 'edit_staff_imp_data' imp_member.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="{% url 'delete_staff_imp_data' imp_member.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> -->
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-...." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>employee monitoring List</title>
+
+<style>
+    body{
+        background-color:WhiteSmoke;
+        display: block;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+   
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd; 
+    }
+
+    th {
+        background-color: #4CAF50; 
+        color: white;
+    }
+
+    td {
+        background-color: #f2f2f2; 
+    }
+</style>
+
+
+<center>
+<h2>Staff Management 1</h2>
+</center>
+
+<table border="1" class="table table-responsive">
+    <tr>
+        <th>ID</th>
+        <th>Heading</th>
+        <th>Description</th>
+        <th>p1</th>
+        <th>Paragraph 2</th>
+        <th>Actions</th>   
+    </tr>
+    {% for fea_member in fea_data %}
+    <tr>
+        <td>{{ fea_member.id }}</td>
+        <td>{{ fea_member.heading }}</td>
+        <td>{{ fea_member.discription }}</td>
+        <td>{{ fea_member.p1 }}</td>
+        <td>{{ fea_member.paragraph2 }}</td>
+        <td>
+            <a href="{% url 'edit_fea_data' fea_member.id %}" style="margin-left:0px;">
+                <i class="fas fa-edit"></i>|
+            </a> 
+            <a href="{% url 'delete_fea_data' fea_member.id %}">
+                <i class="fas fa-trash"></i>
+
+            </a>
+        </td>
+    </tr>
+{% endfor %}     
+    
+</table><br><br>
+<center>
+<h2>Staff Management 2</h2>
+</center>
+<table class="table table-responsive">
+    <tr>
+        <th>Heading</th>
+        <th>discription</th>
+        <th>p1</th>
+        <th>Actions</th>  
+    </tr>
+    {% for problem in staff_prob_data %}
+            <tr>
+                <td>{{ problem.heading }}</td>
+                <td>{{ problem.discription }}</td>
+                <td>{{ problem.p1 }}</td>
+                <td>
+                    <a href="{% url 'edit_staff_prob_data' problem.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="{% url 'delete_staff_prob_data' problem.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+
+<center>
+    <h2>Staff Management 3</h2>
+</center>
+
+
+    <table border="1" class="table table-responsive">
+        <tr>
+          
+            <th>ID</th>
+            <th>Main Heading</th>
+            <th>Image</th>
+            <th>Paragraph 1</th>
+            <th>Paragraph 2</th>
+            <th>Actions</th>
+    
+            
+        </tr>
+        {% for imp_member in staff_imp_data %}
+            <tr>
+                <td>{{ imp_member.id }}</td>
+                <td>{{ imp_member.main_heading }}</td>
+                <td>
+                    {% if imp_member.image %}
+                        <img src="{{ imp_member.image.url }}" alt="Staff Image" width="50">
+                    {% else %}
+                      
+                    {% endif %}
+                </td>
+                <td>{{ imp_member.paragraph1 }}</td>
+                <td>{{ imp_member.paragraph2 }}</td>
+                <td>
+                    <a href="{% url 'edit_staff_imp_data' imp_member.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="{% url 'delete_staff_imp_data' imp_member.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    {% endblock main_content %}
+
+        
+
+        
+

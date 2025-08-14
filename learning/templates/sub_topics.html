@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            .hr{
+                width: 90%;
+                height: 1px;
+                background-color:rgb(116, 110, 110);
+            }
+            .container{
+                margin-top: 100px;
+                margin-left: 250px;
+                border: 2px solid black;
+                width: 60%;
+            }
+            h2{
+                padding-left: 30px;
+            }
+            a{
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+        <h2>Subject Names</h2>
+            
+        {% for i in files1 %}
+
+        <ul>
+
+                
+               <a href="/chapters/{{i.id}}/" style="color:blue" ><li>{{i.subjectname}}</li>
+
+                
+            </a>
+
+            <div class="hr">
+        </ul>
+
+        {% endfor %}
+    </div>
+    </body>
+</html>

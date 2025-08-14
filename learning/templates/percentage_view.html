@@ -1,0 +1,231 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Report</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4); 
+            color: #333;
+        }
+
+        table {
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            background-color: rgba(255, 255, 255, 0.9); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            background: linear-gradient(to bottom, #4CAF50, #388E3C);
+            color: #fff;
+            border: 2px solid white;
+        }
+
+        .present, .half-day, .absent {
+            background: linear-gradient(to bottom, #4CAF50, #388E3C);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .half-day {
+            background: linear-gradient(to bottom, #FFC107, #DAA520);
+            color: #333;
+        }
+
+        .absent {
+            background: linear-gradient(to bottom, #F44336, #D32F2F);
+        }
+
+        .present:hover, .half-day:hover, .absent:hover {
+            filter: brightness(1.2);
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .view-more {
+            background: linear-gradient(to bottom, #2196F3, #1565C0);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-more:hover {
+            filter: brightness(1.2);
+        }
+
+        .prev-month-link, .next-month-link {
+            background: linear-gradient(to bottom, #2196F3, #1565C0);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+     
+
+    </style>
+    <style>
+        .calendar {
+            width: 50%;
+        }
+
+        .calendar td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .calendar th {
+            border: 1px solid white;
+            text-align: center;
+
+        }
+
+        .calendar .date {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .calendar .percentage {
+            display: block;
+            font-size: 1em;
+            color: #444;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- <div id="count-box" style="position: absolute; top: 20px; right: 20px; text-align: right;">
+        <p>Total_Present: <span id="presentCount">0</span></p>
+        <p>Total_Absent: <span id="absentCount">0</span></p>
+        <p>Total_Half-Day: <span id="halfDayCount">0</span></p>
+    </div> -->
+    <center>
+
+    {% if total_duration_per_day_percentage %}
+    <table class="vamsi">
+        <tr>
+            <th>Date</th>
+            <th>Percentage</th>
+            <th>Status</th>
+        </tr>
+        {% for day, percentage in total_duration_per_day_percentage.items %}
+        <tr>
+            <td>{{day}}</td>
+            <td>{{percentage|floatformat:2}}%</td>
+            <td>
+                {% if percentage > 60 %}
+                <button class="present">Present</button>
+                {% elif percentage >= 40 %}
+                <button class="half-day">Half Day</button>
+                {% else %}
+                <button class="absent">Absent</button>
+                {% endif %}
+            </td>
+       
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    {% else %}
+    <p>No attendance data available.</p>
+    {% endif %}
+
+    <br>
+    <br><br>
+
+
+    {% if student.id %}
+    <a class="prev-month-link" href="{% url 'combined' id=student.id %}?{{ prev_month }}">Previous Month</a>
+    <a class="next-month-link" href="{% url 'combined' id=student.id %}?{{ next_month }}">Next Month</a>
+{% else %}
+    <!-- Provide some fallback behavior or message if student ID is not available -->
+    <p>No valid student ID available.</p>
+{% endif %}
+
+
+        <div id="calendar">
+            {{ calendar|safe }}
+        </div>
+<br><br><br><br>
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+
+    </center>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function calculateCounts() {
+                var presentCount = 0;
+                var absentCount = 0;
+                var halfDayCount = 0;
+
+                var rows = document.querySelectorAll(".vamsi tr");
+                for (var i = 1; i < rows.length; i++) { 
+                    var status = rows[i].querySelector("td:nth-child(3)").textContent.trim();
+
+                    if (status === "Present") {
+                        presentCount++;
+                    } else if (status === "Half Day") {
+                        halfDayCount++;
+                    } else if (status === "Absent") {
+                        absentCount++;
+                    }
+                }
+
+                document.getElementById("presentCount").textContent = presentCount;
+                document.getElementById("absentCount").textContent = absentCount;
+                document.getElementById("halfDayCount").textContent = halfDayCount;
+            }
+
+            calculateCounts();
+        });
+    </script>
+</body>
+
+</html>
+{% endblock main_content %}

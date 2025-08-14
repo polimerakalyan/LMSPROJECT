@@ -1,0 +1,151 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+#myInput {
+            background-image: url('/media/images/search-removebg-preview.png');
+            background-position: right;
+            background-repeat: no-repeat;
+            width: 30%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #34495e;
+            margin-bottom: 12px;
+            border-radius: 20px;
+            background-size: 45px;
+            color: #34495e;
+        }
+              
+.shift-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.shift-header a {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.round-bcircle {
+    width: 50px;
+    height: 50px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.round-bcircle img {
+    width: 20px;
+    height: 20px;
+}
+.shift-header p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #212121;
+    padding: 11px;
+    margin-top: 15px;
+}
+P{
+    line-height: 19px;
+}
+    </style>
+</head>
+<body>
+    <div class="shift-header mar-top">
+        <a href="/staff_management/"> <div class="round-bcircle"><img src="https://tenoapp.com/html/images/admin_web_icon/Back_arrow.png" alt=""></div></a>
+            <p>NON TEACHING STAFF</p>  
+        </div>
+<!-- <h2>Non Teaching Staff</h2> -->
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Name, Registration no..." title="type name, Registration">
+
+<table id="myTable">
+    <tr>
+        <th>Name</th>
+        <th>Registration No</th>
+        <th>designation</th>
+        <th>department</th>
+        <th>qualification</th>
+        <th>email</th>
+        <th>phoneno</th>
+        <th>shift_name</th>
+        <th>Experiance</th>
+    </tr>
+    {% for teacher in t1 %}
+    <tr>
+        <td>{{ teacher.first_name }} {{ teacher.last_name }}</td>
+        <td>{{ teacher.registrationno }}</td>
+        <td>{{ teacher.designation }}</td>
+        <td>{{ teacher.department }}</td>
+        <td>{{ teacher.qualification }}</td>
+        <td>{{ teacher.email }}</td>
+        <td>{{ teacher.phoneno }}</td>
+        <td>{{ teacher.shift_name.name }}</td>
+        <td>{{ teacher.experiance }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, tdName, tdRegNo, i, txtValueName, txtValueRegNo;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            tdName = tr[i].getElementsByTagName("td")[0];
+            tdRegNo = tr[i].getElementsByTagName("td")[1];
+            if (tdName && tdRegNo) {
+                txtValueName = tdName.textContent || tdName.innerText;
+                txtValueRegNo = tdRegNo.textContent || tdRegNo.innerText;
+                if (txtValueName.toUpperCase().indexOf(filter) > -1 || txtValueRegNo.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
+{% endblock main_content %}

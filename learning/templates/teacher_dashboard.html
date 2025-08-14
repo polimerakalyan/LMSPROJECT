@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting Schedule</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .table-container {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        padding: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  
+    }
+    h2 {
+        margin-top: 20px;
+    }
+    th {
+        background-color:rgb(181, 241, 231);
+    }
+    .ended {
+        color: #d10d0d;
+    }
+
+</style>
+</head>
+<body>
+<br>
+<div class="container">
+    <div class="table-container">
+        <h2>Upcoming Meetings</h2>
+        <table id="upcoming-meetings" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Class Name</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Meeting Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for meeting in upcoming_meetings %}
+                <tr id="meeting_{{ meeting.id }}" data-endtime="{{ meeting.endtime|date:'U' }}">
+                    <td>{{ meeting.subject_name.name }}</td>
+                    <td>{{ meeting.class_name }}</td>
+                    <td>{{ meeting.meeting_date }}</td>
+                    <td>{{ meeting.starttime}}</td>
+                    <td>{{ meeting.endtime}}</td>
+                    <td><a href="{{ meeting.meeting_link }}">Join Meeting</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="table-container">
+        <h2>Completed Meetings</h2>
+        <table id="completed-meetings" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Class Name</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for meeting in completed_meetings %}
+                <tr>
+                    <td>{{ meeting.subject_name.name }}</td>
+                    <td>{{ meeting.class_name }}</td>
+                    <td>{{ meeting.meeting_date }}</td>
+                    <td>{{ meeting.starttime}}</td>
+                    <td>{{ meeting.endtime}}</td>
+                    <td>Completed</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var now = Math.floor(new Date().getTime() / 1000); 
+        var rows = document.querySelectorAll('#upcoming-meetings tbody tr');
+        rows.forEach(function (row) {
+            var endtime = parseInt(row.getAttribute('data-endtime'));
+            if (endtime && now > endtime) {  
+                row.querySelector('a').remove();
+                var linkCell = row.querySelector('td:last-child');
+                linkCell.textContent = 'Completed';
+                linkCell.classList.add('ended');
+                document.querySelector('#completed-meetings tbody').appendChild(row);
+            }
+        });
+    }
+</script>
+</body>
+</html>

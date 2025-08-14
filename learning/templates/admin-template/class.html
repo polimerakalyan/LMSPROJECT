@@ -1,0 +1,291 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Classwise</title>
+</head>
+<style>
+    table{
+       border-collapse: separate;
+       margin: 0;
+       width:100%;
+       box-shadow: 0 0 5px rgba(0 0 0);
+    }
+    table tr{
+       padding: .45em;
+    }
+    thead tr{
+       background-color: rgba(128, 85, 0, 0.719);
+    
+   
+    }
+     table th, td {
+        border: 1px solid black;
+        padding:1em;
+        text-align: center;
+    }
+    
+    thead th{
+       color:#fff;
+   
+    }
+    @media(max-width:1000px){
+       table{
+           border:2px solid #07676e18;
+       }
+       table thead tr{
+           display:none;
+       }
+       table tr{
+           display: block;
+       }
+       table th,table td{
+           padding: .5em;
+           border: 2px #ddd;
+       }
+       table td{
+           text-align:right;
+           display: block;
+           
+       }
+       table td::before{
+           content:attr(student)":";
+           float:left;
+       }
+       tbody tr:nth-child(even){
+           background-color: #eaaec0 ;
+           color:#ffffff01;
+       }
+    }
+</style>
+<body>
+    
+    <table>
+        <thead>
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>email</th>
+                <th>registration_date</th>
+                <th>Class</th>
+                <th>gender</th>
+                <th>mobile_number</th>
+                <th>parents_name</th>
+                <th>parents_mobile_number</th>
+                <th>date_of_birth</th>
+                <th>address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in class1students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class2students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class3students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class4students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class5students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class6students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class7students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class8students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class9students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class10students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class11students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for student in class12students %}
+            <tr style="font-size: 16px;color: black;font-family: sans-serif ;">
+                <td student="First Name">{{ student.first_name }}</td>
+                <td student="Last Name">{{ student.last_name }}</td>
+                <td student="email">{{ student.email }}</td>
+                <td student="registration_date">{{ student.registration_date }}</td>
+                <td student="student_class">{{ student.className }}</td>
+                <td student="gender">{{ student.gender }}</td>
+                <td student="mobile_number">{{ student.mobile_number }}</td>
+                <td student="parents_name">{{ student.parents_name}}</td>
+                <td student="parents_mobile_number"> {{ student.parents_mobile_number}}</td>
+                <td student="date_of_birth">{{ student.date_of_birth}}</td>
+                <td student="address">{{ student.address}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+{% endblock main_content %}

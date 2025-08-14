@@ -1,0 +1,90 @@
+
+
+{% block content %}
+
+<style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+  
+    .update-title {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .update-form {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .form-group {
+      margin-bottom: 20px;
+    }
+  
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+  
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  
+    .update-btn {
+      background-color: #4CAF50;
+    }
+  </style>
+  
+  <div class="container">
+
+    <h2 class="update-title">Update Fee Payment</h2>
+
+    <form method="post" action="{% url 'update_fee_payment' payment.id %}" class="update-form">
+      {% csrf_token %}
+      <!-- Replace the fields with your actual form fields -->
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="text" name="amount" value="{{ payment.amount }}" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="terms">Terms:</label>
+        <input type="text" name="terms" value="{{ payment.terms }}" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" value="{{ payment.student_class.first_name }}" class="form-control" readonly>
+      </div>
+      <button type="submit" class="btn update-btn">Update</button>
+    </form>
+  </div>
+{% endblock %}
+
+
+
+

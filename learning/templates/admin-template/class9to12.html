@@ -1,0 +1,51 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Classwise</title>
+</head>
+
+    <style>
+    form {
+        display: inline-block; 
+      }
+      button[type="submit"] {
+        background-color: rgba(0, 0, 0, 0.603);
+        color: white;
+        padding: 10px 20px;
+        font-size: 22px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px; 
+        
+        height: 20%;
+      }
+      button[type="submit"]:hover {
+        background-color: #00b324; 
+      }
+    </style>
+    <body>
+        <form action="{% url 'class9' %}" method="get">
+            <button type="submit">9th class 
+            <p> Total Students={{ count_class9students }} </p></button>
+            </form>
+            <form action="{% url 'class10' %}" method="get">
+                <button type="submit">10th class 
+                <p> Total Students={{ count_class10students }} </p></button>
+                </form>
+                <form action="{% url 'class11' %}" method="get">
+                    <button type="submit">11th class
+                    <p> Total Students={{ count_class11students }} </p></button>
+                    </form> 
+                    <form action="{% url 'class12' %}" method="get">
+                        <button type="submit">12th class 
+                        <p> Total Students={{ count_class12students }} </p></button>
+                        </form>   
+    </body>    
+</body>
+</html>
+{% endblock main_content %}

@@ -1,0 +1,110 @@
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <style>
+        .card-profile {
+            background-color: #191934 !important; 
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #191934 !important; 
+            border-bottom: 1px solid #ccc;
+        }
+
+        .profile-photo img {
+            border-radius: 50%;
+            width:50%;
+        }
+
+        .list-group-item {
+            border: none;
+            color: #fff !important; 
+            background-color: #191934;
+        }
+
+        .list-group-item strong {
+            color: #fff !important; 
+        }
+
+       
+        .list-group-item.gender strong,
+        .list-group-item.phone strong,
+        .list-group-item.email strong,
+        .list-group-item.address strong {
+            color: #fff !important; 
+        }
+
+       
+        .profile-name {
+            color: #fff !important; 
+        }
+
+    </style>
+</head>
+
+<body>
+
+   <div class="container mt-5">
+        <div class="row">
+            {% for student in students %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-profile">
+                    <div class="card-header justify-content-end pb-0 border-0">
+                        <div class="dropdown">
+                            <button class="btn btn-link" type="button" data-bs-toggle="dropdown">
+                                <span class="dropdown-dots fs--1"></span>
+                            </button>
+                            <div  class="dropdown-menu dropdown-menu-right border py-0">
+                                <div class="py-2">
+                                    <a class="dropdown-item" href="javascript:void(0);">Edit</a>
+                                    <a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-2">
+                        <div class="text-center">
+                            <div class="profile-photo">
+                                <img src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg" class="img-fluid rounded-circle" alt="">
+                            </div>
+                            <h3 class="mt-4 mb-1 profile-name">{{ student.first_name }} {{ student.last_name }}</h3>
+                            <p class="text-muted">{{ student.student_class }}</p>
+                            <ul class="list-group mb-3 list-group-flush">
+                                <li class="list-group-item px-0 d-flex justify-content-between gender">
+                                    <span class="mb-0">Gender :</span><strong>{{ student.get_gender_display }}</strong>
+                                </li>
+                                <li class="list-group-item px-0 d-flex justify-content-between phone">
+                                    <span class="mb-0">Phone No. :</span><strong>{{ student.mobile_number }}</strong>
+                                </li>
+                                <li class="list-group-item px-0 d-flex justify-content-between email">
+                                    <span class="mb-0">Email:</span><strong>{{ student.email }}</strong>
+                                </li>
+                                <li class="list-group-item px-0 d-flex justify-content-between address">
+                                    <span class="mb-0">Address:</span><strong>{{ student.address }}</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+
+
+

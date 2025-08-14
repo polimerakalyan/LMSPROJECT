@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Table</title>
+</head>
+<body>
+    <h1>Pricing Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Plan Name</th>
+                <th>Price (Monthly)</th>
+                <th>Price (Yearly)</th>
+                <th>Features</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in pricing_plans %}
+            <tr>
+                <td>{{ plan.name }}</td>
+                <td>${{ plan.price_monthly }}</td>
+                <td>${{ plan.price_yearly }}</td>
+                <td>
+                    <ul>
+                        {% for feature in plan.features.all %}
+                        <li>{{ feature.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

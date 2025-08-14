@@ -1,0 +1,126 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+{% load mathfilters %}
+
+<html>
+    <head>
+        <style>
+          /* Basic table styles */
+table {
+  border-collapse: collapse; /* Ensures borders are drawn between cells */
+  width: 110%; /* Makes the table fill the available width */
+  margin: 0 auto; /* Centers the table horizontally */
+  border: 1px solid #ddd; /* Adds a thin border to the table */
+  margin-left: -50px;
+}
+
+/* Table header (thead) styles */
+thead {
+  background-color: #f2f2f2; /* Light gray background for the header */
+  text-align: center; /* Center text in header cells */
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Table body (tbody) styles */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row colors for better readability */
+}
+
+/* Table cell (td) styles */
+td {
+  padding: 10px; /* Space between text and cell borders */
+  border: 1px solid #ddd; /* Borders for individual cells */
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Emphasize header cells */
+th {
+  padding: 15px; /* More padding for header cells */
+}
+
+/* Style the "Teachers Leave Requests" heading */
+h1 {
+  text-align: center; /* Center the heading */
+  font-size: 24px; /* Adjust the heading size */
+  margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+/* Center the table within the "col-10" div */
+.col-10 {
+  text-align: center;
+}
+
+/* Remove default margin from buttons (if using Bootstrap) */
+.btn {
+  margin: 0 5px; /* Add some spacing between buttons */
+}
+
+/* Additional styling for disabled buttons (if using Bootstrap) */
+.btn[disabled] {
+  opacity: 0.5; /* Reduce opacity for disabled buttons */
+  cursor: not-allowed; /* Indicate non-interactiveness */
+}
+
+        </style>
+    </head>
+    <body>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <center>
+                    <h1>
+                        Teacher Leave Requests
+                    </h1>
+                    </center><br>
+                    <table border="2px">
+                        <thead>
+                            <tr>
+                                <th>Teacher Name</th>
+                                <th>Leave type</th>
+                                <th>From date</th>
+                                <th>To date</th>
+                                <th>No.of Requests</th>
+                                <th>Remaining Leave Request's</th>
+                                <th>Reason For Leave</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in p %}
+
+                            <tr>
+                                <td>{{i.admin.first_name}}.{{i.admin.last_name}}</td>
+                                <td>{{i.Leave_Type.leavetype}}</td>
+                                <td>{{i.from_date}}</td>
+                                <td>{{i.to_date}}</td>
+                                <td>{{i.days_difference}}</td>
+                                {% if i.is_status == "1" %}
+                                <td>{{ i.Leave_Type.Noofleaves|sub:i.days_difference }}</td>
+                                {% elif i.is_status != "1" %}
+                                <td>{{ i.Leave_Type.Noofleaves}}</td>
+                                {% endif %}
+                                <td>{{i.Reason}}</td>
+                                <td>
+                                    {% if i.is_status == "0" %}
+                                    <a href="{% url 'leave_approve' i.id %}" class="btn btn-success" style="width: 110px;" >Approve</a>
+                                    <a href="{% url 'leave_disapprove' i.id %}" class="btn btn-danger" style="width: 110px;" >Disapprove</a>
+                                    {% elif i.is_status == "1"  %}
+                                    <button class="btn btn-success" disabled="disabled" data-toggle="modal" data-target="#reply_modal" style="width: 110px;">Approved</button>
+                                    {% else %}
+                                    <button class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#reply_modal" style="width: 110px;">Disapproved</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+            
+                        </tbody>
+                    </table> 
+
+                </div>
+            </div>
+    </body>
+</html>
+{% endblock main_content %}

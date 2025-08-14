@@ -1,0 +1,32 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>carousel_home</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+            
+    </head>
+    <body>
+    
+    
+        <h2 style="text-align: center;"><a href="/carousel_insert/">Add Image</a></h2>
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>image</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            {% for i in b %}
+            <tr>
+                <td><img src="{{ i.image.url }}" width="500px;height:400px;"></td>
+                <td><a href="/carousel_edit/{{i.id}}">update</a></td>
+                <td><a href="/carousel_delete/{{i.id}}">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

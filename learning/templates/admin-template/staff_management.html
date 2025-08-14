@@ -1,0 +1,236 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+ul.breadcrumb li+li:before {
+    padding: 2px;
+    color: #212121;
+    content: "/\00a0";
+}
+
+.breadcrumb-fixed {
+    background-color: #f1f1f1;
+    padding: 10px 0;
+}
+
+.breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.breadcrumb li {
+    margin-right: 10px;
+}
+
+.breadcrumb a {
+    color: #333;
+    text-decoration: none;
+}
+
+.mid-content {
+    padding: 20px;
+}
+
+.shift-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.shift-header a {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.round-bcircle {
+    width: 50px;
+    height: 50px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.round-bcircle img {
+    width: 20px;
+    height: 20px;
+}
+.shift-header p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #212121;
+    padding: 11px;
+    margin-top: 15px;
+}
+P{
+    line-height: 19px;
+}
+
+/* .crow {
+    display: flex;
+    justify-content: center;
+} */
+/* 
+.inner-box {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+.inner-box img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    filter: brightness(0) saturate(100%) invert(48%) sepia(6%) saturate(7480%) hue-rotate(352deg) brightness(98%) contrast(101%);
+}
+
+.inner-box span {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #444;
+}
+
+.inner-box:hover {
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+.inner-box:nth-child(1) {
+    background-color: #efece3;
+}
+
+.inner-box:nth-child(2) {
+    background-color: #673ab7;
+}
+
+.inner-box:nth-child(1) img,
+.inner-box:nth-child(2) img {
+    filter: brightness(0) saturate(100%) invert(13%) sepia(6%) saturate(7480%) hue-rotate(352deg) brightness(98%) contrast(101%);
+}
+
+.inner-box:nth-child(1) span,
+.inner-box:nth-child(2) span {
+    color: #fff;
+}
+
+.inner-box:nth-child(1):hover img,
+.inner-box:nth-child(2):hover img {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(6%) saturate(7480%) hue-rotate(352deg) brightness(98%) contrast(101%);
+}
+
+.inner-box:nth-child(1):hover span,
+.inner-box:nth-child(2):hover span {
+    color: #444;
+}
+ */
+
+ .crow {
+  display: flex; /* Layout elements side-by-side horizontally */
+  justify-content: space-around; /* Distribute evenly with spacing */
+  margin-bottom: 1rem; /* Maintain parent margin */
+}
+
+.crow a {
+  text-decoration: none; /* Remove default link underline */
+  color: inherit; /* Inherit text color from parent */ /* Optional customization */
+}
+
+.inner-box {
+  display: flex;
+  align-items: center; /* Vertically align content within */
+  padding: 1rem; /* Add padding around content */
+  border-radius: 5px; /* Add subtle rounded corners */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9); /* Optional subtle box shadow */
+  transition: transform 0.2s ease-in-out; /* Smooth hover animation */
+  width: 250px;
+  height: 100px;
+}
+
+.inner-box:hover {
+  transform: scale(1.05); /* Slight hover zoom effect */
+}
+
+.inner-box img {
+  width: 40px; /* Set image width */
+  height: 40px; /* Set image height */
+  margin-right: 1rem; /* Add spacing between image and text */
+}
+
+.inner-box span {
+  font-weight: bold; /* Make text bold */
+}
+
+  </style>
+</head>
+<body>
+    <div class="breadcrumb-fixed">
+        <div class="col-12 dash-details-1">
+            <ul class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#" class="active">Staff</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="mid-content">
+        <div class="shift-header mar-top">
+        <a href="/sidenavbar/"> <div class="round-bcircle"><img src="https://tenoapp.com/html/images/admin_web_icon/Back_arrow.png" alt=""></div> </a>
+            <p> STAFF</p><hr>
+        </div>
+        
+        <div class="crow">
+            <div class="mb-4">
+                <a href="/teaching_staff/">
+                    <div class="inner-box">
+                        <div class="round-bcircle"><img src="https://cdn-icons-png.flaticon.com/512/5344/5344646.png" alt=""></div> 
+                        <span>Teaching</span>   
+                    </div>
+                </a>
+            </div>
+            <div class="mb-4">
+                <a href="/non_teaching_staff/">
+                    <div class=" inner-box">
+                        <div class="round-bcircle"><img src="https://cdn.imgbin.com/2/10/23/feminism-icon-teacher-icon-RETM0uQ6.jpg" alt=""></div>     
+                        <span>Non Teaching</span>     
+                    </div>
+                </a>                        
+            </div>
+            <!-- <div class="mb-4">
+                <a href="/admin/set-holiday-calendar">
+                    <div class=" inner-box">
+                        <img src="/html/images/admin_web_icon/zero/holiday.png" alt="">  
+                        <span>Set Holiday calendar</span>     
+                    </div>
+                </a>
+            </div>
+            <div class="mb-4">
+                <a href="/admin/leave-management">
+                    <div class="inner-box">
+                        <img src="/html/images/admin_web_icon/marksheet/Leave_icon.png" alt="" class="img-width">   
+                        <span>Leave Management</span>     
+                    </div>
+                </a> -->
+    </div> 
+</body>
+</html>
+{% endblock main_content %}

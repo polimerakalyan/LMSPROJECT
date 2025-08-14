@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel_images</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+      <div class="form-group">
+        <label>image</label>
+        <input type="file" name="image" class="form-control">
+      </div>
+      <input type="submit" class="btn btn-block btn-danger">
+    </form>
+</body>
+</html>

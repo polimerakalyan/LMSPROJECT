@@ -1,0 +1,217 @@
+{% extends 'student-template/student_sidebar.html' %}
+{% block main_content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css"> <!-- Add a custom stylesheet for thematic styling -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+    <style>
+
+/* styles.css */
+
+body {
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+/* .container {
+    background: linear-gradient(to right, #64b5f6, #4caf50);
+    border-radius:10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    color: #fff; 
+    width: 85%;
+    margin-left: 30px;
+    
+} */
+
+.message-container {
+    margin-top: 10px;
+    height: 400px;
+    margin-right: 5px;
+    padding-top: 30px;
+}
+
+.message-preview {
+    cursor: pointer;
+    margin: 10px 0;
+    border-radius: 5px; /* Rounded corners for message previews */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/*  */
+
+.message-preview i {
+    margin-right: 10px;
+}
+
+.full-message-container {
+    display: none;
+    margin-top: 30px;
+    background-color: rgb(201, 38, 38); /* Light green background for full messages */
+    border-radius: 5px; /* Rounded corners for full messages */
+}
+
+.pagination-container {
+    margin-top: 90px;
+}
+
+/* Pagination styles */
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.pagination a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination .active a {
+    z-index: 3;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .col-md-8 {
+        width: 100%;
+    }
+}
+
+
+    </style>
+</head>
+
+<body >
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="message-container">
+                    <table class="table table-striped" style="width: 180%;">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Message</th>
+                                <th>date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for message in k2 %}
+                                <tr>
+                                    <td>
+                                        {% if message.MessageType == "0" %}
+                                            <i class="fas fa-bell"></i> Remainder
+                                        {% elif message.MessageType == "1" %}
+                                            <i class="fas fa-book"></i> HomeWork
+                                        {% elif message.MessageType == "2" %}
+                                            <i class="fas fa-chalkboard"></i> ClassWork
+                                        {% endif %}
+                                    </td>
+                                    <td class="message-preview" data-full-message="{{ message.Message }}">
+                                        {{ message.ShortMessage }}
+                                    </td>
+                                    <td>
+                                        {{ message.date }}
+                                    </td>
+                                   
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
+                    <div class="full-message-container">
+                    </div>
+                  
+
+                    <div class="pagination-container text-center">
+                        <ul class="pagination" id="pagination-tea1"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function () {
+        $("#pagination-tea1").twbsPagination({
+            totalPages: Math.ceil($(".message-container tbody tr").length / 3),
+            visiblePages: 15,
+            onPageClick: function (event, page) {
+                showHideItems(".message-container tbody tr", page);
+            },
+            first: false,  // Hide first button
+            prev: false,   // Hide previous button
+            next: false,   // Hide next button
+            last: false    // Hide last button
+        });
+
+        function showHideItems(rowSelector, page) {
+            var itemsPerPage = 3;
+            $(rowSelector).hide();
+
+            var startIndex = (page - 1) * itemsPerPage;
+            var endIndex = startIndex + itemsPerPage;
+
+            $(rowSelector).slice(startIndex, endIndex).show();
+        }
+
+        // Toggle full message on click
+        $(".message-preview").click(function () {
+            var fullMessage = $(this).data("full-message");
+            var fullMessageContainer = $(".full-message-container");
+
+            // Toggle display of the full message next to the clicked message
+            if (fullMessageContainer.is(":visible")) {
+                fullMessageContainer.hide();
+            } else {
+                fullMessageContainer.html(fullMessage).insertAfter(this).show();
+            }
+        });
+
+        showHideItems(".message-container tbody tr", 1);
+    });
+</script>
+
+
+</body>
+
+</html>
+
+
+{% endblock main_content %}
+

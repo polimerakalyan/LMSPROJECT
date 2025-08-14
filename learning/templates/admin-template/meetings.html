@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Meeting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-control {
+            margin-bottom: 20px;
+        }
+        .form-control label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #4b5563;
+            font-weight: bold;
+        }
+        .form-control select,
+        .form-control input {
+            width: 100%;
+            padding: 8px; /* Adjusted padding */
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            background-color: #f3f4f6;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: red;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-submit:hover {
+            background-color: #1e40af;
+        }
+        .error-message {
+            color: blue;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .main-heading {
+            color: #ffffff;
+            background-color: #2563eb;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .side-heading {
+            color: #000000;
+            font-weight: bold;
+
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div class="container">
+        <h1 class="main-heading">Create Meeting</h1>
+        <form id="create-meeting-form" method="post">
+            {% csrf_token %}
+            <div class="form-control">
+                <label class="side-heading" for="class_level">Class Level:</label>
+                <select name="class_level" id="class_level">
+                    <option value="">Select class</option>
+                    {% for class_level in class_levels %}
+                        <option value="{{ class_level.id }}">{{ class_level.classes }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label class="side-heading" for="subject">Subject:</label>
+                <select name="subject" id="subject">
+                    <option value="">Select subject</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label class="side-heading" for="teacher">Teacher:</label>
+                <select name="teacher" id="teacher">
+                    <option value="">Select Teacher</option>
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label for="meeting_date">Meeting Date:</label>
+                <input type="date" name="meeting_date" id="meeting_date">
+            </div>
+
+
+            <div class="form-control">
+                <label for="meeting_link">Meeting Link:</label>
+                <input type="url" name="meeting_link" id="meeting_link">
+            </div>
+            <div class="form-control">
+                <label for="start_time">Start Time:</label>
+                <input type="time" name="starttime" id="start_time">
+            </div>
+            <div class="form-control">
+                <label for="end_time">End Time:</label>
+                <input type="time" name="endtime" id="end_time">
+            </div>
+            
+            
+
+
+            <button type="submit" class="btn-submit">Create Meeting</button>
+        </form>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const classLevelSelect = document.getElementById('class_level');
+        const subjectSelect = document.getElementById('subject');
+        const teacherSelect = document.getElementById('teacher');
+
+        classLevelSelect.addEventListener('change', updateTeachers);
+        subjectSelect.addEventListener('change', updateTeachers);
+
+        function updateTeachers() {
+            const classLevelId = classLevelSelect.value;
+            const subjectId = subjectSelect.value;
+
+            fetch(`/meeting/?class_level=${classLevelId}&subject=${subjectId}`)
+                .then(response => response.json())
+                .then(data => {
+                    teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+                    data.teachers.forEach(teacher => {
+                        const option = document.createElement('option');
+                        option.value = teacher.id;
+                        option.textContent = `${teacher.first_name} ${teacher.last_name}`;
+                        teacherSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching teachers:', error));
+        }
+    });
+</script>
+
+</body>
+</html>

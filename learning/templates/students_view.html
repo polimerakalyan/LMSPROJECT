@@ -1,0 +1,62 @@
+{% extends 'teacher-template/teachersidebar.html' %}
+{% block main_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 10px;
+            width: 20%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 10px;
+        }
+
+        .view-link {
+            text-decoration: none;
+            color: #ff0000;
+            font-weight: bold;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #64b5f6, #4caf50); 
+}
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+{% for i in k %}
+    <div class="card">
+        <div class="card-content">
+            <p><strong>ID:</strong> {{ i.id }}</p>
+            <p><strong> Name:</strong> {{ i.first_name }} {{ i.last_name }}</p>
+            <p><a class="view-link" href="/combined/{{i.id}}">View Attendance</a></p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+</body>
+</html>
+{% endblock main_content %}

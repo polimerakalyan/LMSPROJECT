@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Django App</title>
+    
+</head>
+<body>
+    
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+
+    <script>
+        CKEDITOR.replace('id_content');  
+    </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Students</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #64b5f6, #4caf50);    
+            margin: 0;
+            padding: 0;
+            font-size: medium;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            margin: 10px;
+            width: 300px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #fff;
+        }
+
+        .card p {
+            color: #ccc;
+        }
+
+        .show-details-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .show-details-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Thematic Popup Styles */
+        .popup-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .popup {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            position: relative;
+            max-width: 80%;
+            overflow: auto;
+            animation: slideIn 0.5s ease;
+        }
+
+        .popup table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #fff;
+            margin-bottom: 20px;
+        }
+
+        .popup th, .popup td {
+            border: 1px solid #fff;
+            border-collapse: collapse;
+
+            padding: 10px;
+            color: #fff;
+        }
+
+        .popup th {
+            background-color: #007bff;
+        }
+strong{
+    color: rgb(248, 224, 9);
+}
+  
+
+        /* Keyframe Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+    <style>
+        /* Thematic Search Input Styles */
+        .search-container {
+            position: relative;
+            width: 400px;
+            background-color: #37474F;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease;
+            margin-left: 400px;
+            text-align: center;
+        }
+    
+        #searchInput {
+            border: none;
+            width: calc(100% - 40px);
+            padding: 10px;
+            font-size: 16px;
+            background-color: transparent;
+            color: #fff;
+            outline: none;
+        }
+    
+
+    
+   
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <br><br>
+    <center>
+        <div class="search-container">
+            <input type="text" id="searchInput" oninput="filterCards()" placeholder="Search by First Name or Last Name">
+        </div>
+    </center>
+    
+<div class="container">
+
+
+    {% for data in student_data %}
+    <div class="card" id="card-{{ data.student.id }}">
+        <h2>{{ data.student.first_name }} {{ data.student.last_name }}</h2>
+        <p><strong>Class:</strong> {{ selected_class.classes }}</p>
+        <p><strong>Shift:</strong> {{ data.student.shift.name }}</p>
+        <p><strong>First Login Time:</strong> {% if data.first_login %}{{ data.first_login.login_time }}{% else %}No login record found{% endif %}</p>
+        {% if data.shift_ended %}
+        <p><strong>Last Logout Time:</strong> {% if data.last_logout %}{{ data.last_logout.logout_time }}{% else %}None{% endif %}</p>
+        <p><strong>Status:</strong> <span class="status">{{ data.status }}</span></p>
+        {% endif %}
+        <strong>Report:</strong><button class="show-details-btn" onclick="showPopup('{{ data.student.id }}')">Day-Wise</button>
+        <br>
+        <button class="show-details-btn"><a style="color: whitesmoke;" href="/combined/{{ data.student.id }}">Month-Wise</a></button>
+    </div>
+    {% endfor %}
+    
+    {% for data in student_data %}
+    <div class="popup-container" id="popup-container-{{ data.student.id }}">
+        <div class="popup">
+            <span  onclick="hidePopup('{{ data.student.id }}')">&times;<button style="margin-left: 600px;" class="btn btn-danger">Close</button></span>
+            <h2>Multiple login & logout Details</h2>
+            <h2>{{ data.student.first_name }} {{ data.student.last_name }}'s Details</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Login Time</th>
+                    <th>Logout Time</th>
+                    <th>Duration</th>
+                    <th>Percentage of Duration</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entry in data.login_logout_entries %}
+                <tr>
+                    <td>{{ entry.login_time }}</td>
+                    <td>{{ entry.logout_time }}</td>
+                    <td>{{ entry.get_total_duration }}</td>
+                    <td>{{ entry.percentage }}%</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <p>Total Percentage of Duration: {{ data.total_percentage }}%</p>
+            <p>Total Shift Duration: {{ data.total_shift_duration_minutes }} Min</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function showPopup(studentId) {
+        var popupContainer = document.getElementById('popup-container-' + studentId);
+        if (popupContainer) {
+            popupContainer.style.display = 'flex';
+        }
+    }
+
+    function hidePopup(studentId) {
+        var popupContainer = document.getElementById('popup-container-' + studentId);
+        if (popupContainer) {
+            popupContainer.style.display = 'none';
+        }
+    }
+
+    function filterCards() {
+        var input, filter, cards, card, name, i;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        cards = document.getElementsByClassName("card");
+        for (i = 0; i < cards.length; i++) {
+            card = cards[i];
+            name = card.getElementsByTagName("h2")[0];
+            if (name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
+{% endblock main_content %}

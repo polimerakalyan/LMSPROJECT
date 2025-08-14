@@ -1,0 +1,205 @@
+{% extends 'hom4.html' %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block main_content %}
+
+
+<!-- <html>
+    <head>
+        <title>admission_home1</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    </head>
+    <body>
+        <table border="2px">
+            <tr
+            align="center">
+                <th>images</th>
+                <th>content</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            <button><a href="/admission_insert1/">add new element</a></button> 
+            {% for i in h1 %}
+            <tr>
+                <td><img src="{{ i.images.url }}" height="200" width="200"></td>              
+                <td>{{i.content}}</td>
+                <td><a href="/admission_edit1/{{i.id}}" class="bi bi-arrow-clockwise">update</a></td>
+                <td><a href="/admission_delete1/{{i.id}}" class="bi bi-trash3">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table border="2px">
+            <tr
+            align="center">
+                <th>images</th>
+                <th>heading</th>
+                <th>content</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            <button><a href="/admission_insert2/">add new element</a></button> 
+            {% for i in h2 %}
+            <tr>
+                <td><img src="{{i.images.url}}" style="width:250px; height:250px;"></td>
+                <td>{{i.heading}}</td>
+                <td>{{i.content}}</td>
+                <td><a href="/admission_edit2/{{i.id}}" class="bi bi-arrow-clockwise">update</a></td>
+                <td><a href="/admission_delete2/{{i.id}}" class="bi bi-trash3">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table border="2px">
+            <tr
+            align="center">
+                <th>images</th>
+                <th>heading</th>
+                <th>content</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            <button><a href="/admission_insert3/">add new element</a></button> 
+            {% for i in h3 %}
+            <tr>
+                <td><img src="{{i.images.url}}" style="width:250px; height:250px;"></td>
+                <td>{{i.heading}}</td>
+                <td>{{i.content}}</td>
+                <td><a href="/admission_edit3/{{i.id}}" class="bi bi-arrow-clockwise">update</a></td>
+                <td><a href="/admission_delete3/{{i.id}}" class="bi bi-trash3">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-...." crossorigin="anonymous" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>employee monitoring List</title>
+
+<style>
+body{
+    background-color:WhiteSmoke;
+    display: block;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; 
+}
+
+th {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+td {
+    background-color: #f2f2f2; 
+}
+</style>
+
+
+<center>
+<h2>Admission Management 1</h2>
+</center>
+
+<table border="1" class="table table-responsive">
+<tr>
+    <th>images</th>
+    <th>content</th>
+    <th>update</th>
+    <th>delete</th>    
+</tr>
+{% for i in h1 %}
+<tr>
+    {% if i.images %}
+    <td><img src="{{ i.images.url }}" height="200" width="200"></td>  
+    {% else %}         
+    {% endif %}   
+    <td>{{i.content}}</td>
+    <td><a href="/admission_edit1/{{i.id}}" ><i class="fas fa-edit" style="color:blue;" ></i></a></td>
+
+    <td><a href="/admission_delete1/{{i.id}}" ><i class="fas fa-trash-alt" style="color:red;"></i></a>
+    </td>
+    </tr>
+{% endfor %}   
+  
+
+</table><br><br>
+<center>
+<h2>Admission Management 2</h2>
+</center>
+<table class="table table-responsive">
+<tr>
+    <th>images</th>
+    <th>heading</th>
+    <th>content</th>
+    <th>update</th>
+    <th>delete</th>  
+</tr>
+{% for i in h2 %}
+<tr>
+    {% if i.images %}
+    <td><img src="{{i.images.url}}" style="width:250px; height:250px;"></td>
+    {% else %}
+    {% endif %}
+
+    <td>{{i.heading}}</td>
+        <td>{{i.content}}</td>
+    
+    <td><a href="/admission_edit2/{{i.id}}"><i class="fas fa-edit" style="color:blue;" ></i></a></td>
+
+    <td><a href="/admission_delete2/{{i.id}}"><i class="fas fa-trash-alt" style="color:red;"></i></a></td>
+    </tr>
+   
+{% endfor %}  
+</table><br><br>
+
+<center>
+<h2>Admission Management 3</h2>
+</center>
+
+
+<table border="1" class="table table-responsive">
+    <tr>
+      
+        <th>images</th>
+        <th>heading</th>
+        <th>content</th>
+        <th>update</th>
+        <th>delete</th>
+        
+    </tr>
+    {% for i in h3 %}
+    <tr>
+      
+        {% if i.images %}
+        <td><img src="{{i.images.url}}" style="width:250px; height:250px;"></td>
+        {% else %}
+        {% endif %} 
+
+        <td>{{i.heading}}</td>
+        <td>{{i.content}}</td>
+      <td><a href="/admission_edit3/{{i.id}}"><i class="fas fa-edit" style="color:blue;" ></i></a></td>
+
+        <td><a href="/admission_delete3/{{i.id}}"><i class="fas fa-trash-alt" style="color:red;"></i></a></td>
+     </tr>
+    
+    {% endfor %}  
+</table>
+
+
+{% endblock main_content %}
+
+    
+
+    

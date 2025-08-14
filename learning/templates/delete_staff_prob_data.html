@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Staff Problem Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .confirmation-container {
+            max-width: 700px;
+            margin: 20px auto; /* Centering using auto margins */
+            {% comment %} background: #fff; {% endcomment %}
+            padding: 20px;
+            border-radius: 8px;
+            {% comment %} box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); {% endcomment %}
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c9302c;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 4px;
+            background-color: #3498db;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container form,
+        .button-container a {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <center><h1 style="font-size:30px;">DELETE  STAFF PROBLEM DATA</h1></center>
+    <div class="confirmation-container">
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Heading</td>
+                <td>{{ data.heading }}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{ data.discription }}</td>
+            </tr>
+            <tr>
+                <td>P1</td>
+                <td>{{ data.p1 }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="button-container">
+        <p style="font-size:20px;">Are you sure you want to delete the staff problem data with heading "{{ data.heading }}"?</p>
+
+        <form id="deleteForm" method="post" action="{% url 'delete_staff_prob_data' data.id %}">
+            {% csrf_token %}
+            <button type="submit" value="Submit">Delete</button>
+        </form>
+        <a href="{% url 'display_staff_prob_data' %}">Cancel</a>
+    </div>
+
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            // Perform AJAX request to delete the data
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    // Optionally, you can include any additional data needed for deletion
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If deletion is successful, show the alert
+                    alert('Staff problem data with heading "{{ data.heading }}" deleted successfully!');
+                    // Redirect to another page
+                    window.location.href = "{% url 'display_staff_prob_data' %}";
+                } else {
+                    // If deletion fails, handle the error
+                    alert('Failed to delete staff problem data. Please try again later.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the staff problem data. Please try again later.');
+            });
+        });
+    </script>
+</body>
+</html>

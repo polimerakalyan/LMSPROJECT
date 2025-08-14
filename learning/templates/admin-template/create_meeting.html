@@ -1,0 +1,25 @@
+
+
+
+<!-- create_meeting.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Meeting</title>
+</head>
+<body>
+    <h2>Create Meeting</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="Meet">Meet Link:</label><br>
+        <input type="url" id="meet_link" name="meet_link"><br>
+
+        <label for="datetime">Date and Time:</label><br>
+        <input type="datetime-local" id="datetime" name="datetime"><br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

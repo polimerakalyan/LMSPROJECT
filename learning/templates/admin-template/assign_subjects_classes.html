@@ -1,0 +1,219 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aassign Teacher</title>
+    <style>
+        /* :root {
+  --color-primary: #24e1ce;
+  --color-secondary: #1563ff;
+  --color-gray: #333333;
+  --color-white: #fff;
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: var(--color-white);
+  background-color: var(--color-gray);
+  font-size: 1.8rem;
+}
+   body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        } */
+
+        h2 {
+            color: #3498db;
+            text-align: center;
+        }
+
+.form-group {
+    margin-bottom: 15px; 
+   
+}
+
+.form-control {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+   
+} 
+
+.form-check {
+    display: inline-block; /* Arrange checkboxes horizontally */
+    margin-right: 15px;
+    margin-bottom: 5px;
+   
+    
+}
+
+.form-check-input {
+    margin-top: 0; /* Align checkbox with label */
+    width: 17px;
+    height: 20px;
+}
+
+.form-check-label {
+    vertical-align: middle; /* Align label text with checkbox */
+}
+
+button {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0062cc; 
+}
+.alert {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.container{
+            width: 70%;
+            
+}
+.card{
+  /* background-color: #2c3e50; */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  border: 1px solid;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <h2>Assign Subjects and Classes to Teachers</h2><br>
+    <div class="container">
+        <div class="card">
+            {% if message %}
+                <div id="success-message" class="alert alert-success mt-3" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="teacher">Teacher:</label>
+                    <select name="teacher" id="teacher" class="form-control">
+                        <option>----Select Teacher----</option>
+                        {% for teacher in teachers %}
+                            <option value="{{ teacher.id }}">{{ teacher.first_name }} {{ teacher.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label for="classes">Classes:</label>
+                    {% for cls in classes %}
+                        <div class="form-check">
+                            <input type="checkbox" name="classes" value="{{ cls.id }}" class="form-check-input class-checkbox">
+                            <label class="form-check-label">{{ cls.classes }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group" id="subject-group" style="display: none;">
+                    <label for="subject">Subject:</label>
+                    <select name="subject" id="subject-selector" class="form-control">
+                        <option value="">----Select Subject----</option>
+                    </select>
+                </div>
+                <button type="submit" id="assign-btn" class="btn btn-primary">Assign</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 1000);
+            }
+
+            const classCheckboxes = document.querySelectorAll('.class-checkbox');
+            const subjectGroup = document.getElementById('subject-group');
+            const subjectSelector = document.getElementById('subject-selector');
+            const uniqueSubjects = new Set();
+
+            classCheckboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    const checkedClasses = Array.from(document.querySelectorAll('.class-checkbox:checked')).map(checkbox => checkbox.value);
+
+                    if (checkedClasses.length > 0) {
+                        subjectSelector.innerHTML = '<option value="">----Select Subject----</option>';
+                        uniqueSubjects.clear();
+
+                        checkedClasses.forEach(classId => {
+                            fetch(`/get-subjects-for-class/${classId}/`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    data.forEach(subject => {
+                                        if (!uniqueSubjects.has(subject.id)) {
+                                            const option = document.createElement('option');
+                                            option.value = subject.id;
+                                            option.text = subject.name;
+                                            subjectSelector.appendChild(option);
+                                            uniqueSubjects.add(subject.id);
+                                        }
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching subjects for class', classId, ':', error);
+                                });
+                        });
+
+                        subjectGroup.style.display = 'block';
+                    } else {
+                        subjectGroup.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock main_content %}  

@@ -1,0 +1,72 @@
+
+{% extends 'student-template/student_sidebar.html' %}
+{% block main_content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Fee Payment Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+{% load mathfilters %}
+<table border="2" class="table table-bordered table-hover table-animated table-striped">
+    <tr>
+        <td>Amount</td>
+        <td>Term 1</td>
+        <td>Term 2</td>
+        <td>Term 3</td>
+        <td>Balance</td>
+        <td>Pay</td>
+    </tr>
+    {% for payment in fee_payments %}
+    <tr>
+        <td>{{ payment.amount }}</td>
+        {% if payment.term1 == "0" %}
+        <td>paid</td>
+        {% else %}
+        <td>{{ payment.term1 }}</td>
+        {% endif %}
+        {% if payment.term2 == "0" %}
+        <td>paid</td>
+        {% else %}
+        <td>{{ payment.term2 }}</td>
+        {% endif %}
+        {% if payment.term3 < "1" %}
+        <td>paid</td>
+        {% else %}
+        <td>{{ payment.term3 }}</td>
+        {% endif %}
+        <td>{{ payment.balance }}</td> <!-- Make sure this line is correct -->
+        <td>
+            <button style="background-color: green;">
+                <a style="color: #f8f9fa; text-decoration: none;" href="/studentpayfee_edit/{{ payment.id }}">Pay</a>
+            </button>
+        </td>              
+    </tr>
+    {% endfor %}  
+</table>   
+
+</body>
+</html>
+{% endblock main_content %}

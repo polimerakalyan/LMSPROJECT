@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <style>
+    table {
+  font-family: Arial, sans-serif; /* Set a readable font */
+  border-collapse: collapse; /* Remove default table border spacing */
+  width: 95%; /* Make table fit the container */
+  margin-left: auto; /*placing the table center*/
+  margin-right: auto;
+  
+}
+
+th, td {
+  border: 1px solid #ddd; /* Add a thin border to each cell */
+  padding: 14px; /* Add some padding inside the cells */
+  text-align: center; /* Align text to the left by default */
+}
+
+th {
+  background-color: #f2f2f2; /* Light grey background for headers */
+  color: #333; /* Darker text for headers */
+}
+
+tr:nth-child(even) { /* Style even rows */
+  background-color: #f9f9f9; /* Light grey background for even rows */
+}
+tr:nth-child(odd) { /* Style odd rows */
+  background-color: white; /* white background for even rows */
+}
+th{
+    background-color: #76ABAE; /* heading background*/
+}
+.card-container
+{
+    height: auto;
+    width: auto;
+    block-size: fit-content;
+    margin: 2rem auto;
+    display: grid;
+    
+}
+.card-content tr:hover{
+    padding: 20px;
+    box-shadow: 0 30px 50px rgba(216, 208, 208, 0.16);
+    transform: translate(9px,0px);
+}
+h2{
+    color: #31363F;
+}
+/*tbody tr:hover {
+    background-color: #ddd;
+    
+}*/
+*{
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body{
+    background-image: linear-gradient(to right,white ,#AAD7D9);
+}
+.card{
+    padding: 2rem;
+    box-shadow: 0 0 .4rem .4rem rgba(0, 0, 0, 0.2);
+    width: 95%;
+    transition: .4s ease-in;
+    border-radius: 25px;
+    background-color: white;
+}
+.card-container{
+    width: auto;
+}
+
+</style>
+</head>
+<body>
+    <br><br>
+    <i class="fa-solid fa-video"></i>
+    <h1 style="text-align: right; padding-right: 50px;">Welcome, {{ student.first_name }} {{ student.last_name }}</h1><br>
+    <center><h2>Scheduled  Upcoming  Classes</h2></center>
+    
+</body>
+
+<div class="card-container">
+    <center>
+    <div class="card">
+        <div class="card-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Meeting Subject</th>
+                        <th>Teacher</th>
+                        <th>Meeting Date</th>
+                        <th> Timing</th>
+                        <th>Meeting Link/ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for meeting in upcoming_meetings %}
+                    <tr>
+                        <td>{{ meeting.subject_name.name }}</td>
+                        <td>{{ meeting.Teacher_name.first_name }} {{ meeting.Teacher_name.last_name }}</td>  
+                        <td>{{ meeting.meeting_date }}</td>
+                        <td>{{meeting.meeting_time}}</td>
+                        <td><a href="{{ meeting.meeting_link }} {{ meeting.meeting_id }} " target="_blank"> join the class</a></td>  </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+    </div>
+</center>
+</div>
+</html>
+

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>
+            dis
+        </title>
+        <style>
+            p{
+                margin-left:10%;
+                margin-right:10%;
+            }
+            .btn{
+                    
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+                margin: 6px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                width: 98%;
+                font-weight:500;
+                font-size:15px;
+            }
+            a{
+                text-decoration:none;
+                color:black;
+                
+            }
+          
+        </style>
+    </head>
+    <body>
+        {% for i in res %}
+        <center><h1>{{i.intro}}</h1></center>
+        <p>{{i.description}}</p>
+        <a href="/edit1/{{i.id}}/{{i.subid}}"><button class="btn">{{i.chaptername}}</button></a>
+       
+        {% endfor %}
+    </body>
+    </html>

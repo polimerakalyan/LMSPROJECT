@@ -1,0 +1,658 @@
+
+
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+<html>
+    <head>
+        <title>Compose Message</title>
+       
+
+
+    <style>
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.col-md-9 {
+  width: 75%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.col-md-3 {
+  width: 10%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #1e2442;
+  color: white;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.card-body {
+  padding: 15px;
+  font-size: 16px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #1e2442;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0f1525;
+}
+@media (max-width: 767.98px) {
+  .col-md-9,
+  .col-md-3 {
+    width: 100%;
+  }
+}
+/* CSS for the error message */
+#error {
+  margin-top: 20px;
+  background-color: red;
+  color: whitesmoke;
+}
+
+/* CSS for the success message */
+#success {
+  margin-top: 20px;
+  background-color: green;
+  color: whitesmoke;
+}
+
+/* Responsive CSS for hiding and showing the form cards */
+@media (max-width: 768px) {
+  .card {
+    display: block; /* Change the display property for smaller screens */
+  }
+}
+/* .col-md-3 {
+    width: 25%;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+} */
+
+#1e2442 {
+    background-color: #1e2442;
+    color: white;
+    
+  
+}
+.box{
+  font-size: 14px;
+  text-align: center;
+ 
+}
+
+input[type="checkbox"] {
+    accent-color: white;
+    font-size: 16px;
+}
+
+h {
+    text-align: center;
+}
+    </style>     
+ 
+    </head> 
+    <body> 
+
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div  id="error" class="alert alert-error" style="margin-top:20px;background-color:red;color: whitesmoke;">{{ message }}</div>
+      {% endif %}
+      {% if message.tags == 'success' %} 
+      <div  id="success" class="alert alert-success" style="margin-top:20px;background-color:green;color: whitesmoke;">{{ message }}</div>
+      {% endif %}
+      {% endfor %}
+      {% endif %} 
+
+        <div class="row" style="padding-top:-20%;"> 
+        <div class="col-md-9"> 
+
+        <form method="POST" action="/compose_message12/">{% csrf_token %}
+        <h1>Compose Message</h1>
+
+        <div class="form-group">
+
+          <label for="Teacher">To:-</label> 
+                   
+
+          <div class="card" id="form1" style="display: none;"> 
+                        
+                        
+          <div class="card-body">  
+                           
+           
+          <input type="checkbox" name="all_teachers" value="">ALL TEACHERS &nbsp;&nbsp;&nbsp;<br><br>
+
+          </div>
+          </div>  
+
+
+          <div class="card" id="form2" style="display: none;"> 
+                       
+                        
+          <div class="card-body">    
+                
+          <input type="checkbox" name="all_students" value="">ALL STUDENTS &nbsp;&nbsp;&nbsp;<br><br>
+                                    
+          </div>    
+          </div>                   
+                        
+                            <!-- <div class="card" id="form3" style="display: none;">
+                       
+                        
+                                <div class="card-body">
+                    
+                                        <input type="checkbox" name="" value="all Parents">ALL PARENTS &nbsp;&nbsp;&nbsp;<br><br>
+                                        
+                                </div>
+                            </div>     -->
+
+                             
+
+            
+
+
+                                
+            <div class="card" id="form5" style="display: none;">  
+                                   
+            <div class="card-body">                             
+                          
+            <input type="checkbox" name="1st_class" value="">CLASS 1 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                              
+            </div>
+            </div>    
+                                    
+                                    
+            <div class="card" id="form6" style="display: none;">  
+                                              
+            <div class="card-body">                                                      
+                            
+            <input type="checkbox" name="2nd_class" value="">CLASS 2 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                
+            </div> 
+            </div> 
+
+                                      
+            <div class="card" id="form7" style="display: none;">  
+                                        
+            <div class="card-body">                            
+                              
+            <input type="checkbox" name="3rd_class" value="">CLASS 3 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                  
+            </div>
+            </div>  
+
+                                        
+            <div class="card" id="form8" style="display: none;">                        
+                        
+            <div class="card-body">                            
+                                
+            <input type="checkbox" name="4th_class" value="">CLASS 4 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                    
+            </div>
+            </div>  
+
+
+            <div class="card" id="form9" style="display: none;"> 
+                                               
+            <div class="card-body">                                              
+                                  
+            <input type="checkbox" name="5th_class" value="">CLASS 5 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                      
+            </div>
+            </div> 
+             
+            
+
+                                            
+            <div class="card" id="form10" style="display: none;">  
+                                               
+            <div class="card-body">                            
+                                    
+            <input type="checkbox" name="6th_class" value="">CLASS 6 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                        
+            </div>
+            </div>                 
+
+
+
+                                              
+            <div class="card" id="form11" style="display: none;">  
+                                               
+            <div class="card-body">                             
+                                      
+            <input type="checkbox" name="7th_class" value="">CLASS 7 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                          
+            </div>
+            </div>  
+
+
+                                                  
+                                                
+            <div class="card" id="form12" style="display: none;">  
+                                               
+            <div class="card-body">                             
+                                        
+            <input type="checkbox" name="8th_class" value="">CLASS 8 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                            
+            </div>
+            </div>
+
+
+            <div class="card" id="form4" style="display: none;">
+                                              
+            <div class="card-body"> 
+                          
+            <input type="checkbox" name="9th_class" value="">CLASS 9 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                              
+            </div>
+            </div> 
+
+
+
+            <div class="card" id="form13" style="display: none;">  
+                                               
+            <div class="card-body">                            
+                                          
+            <input type="checkbox" name="10th_class" value="">CLASS 10 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                              
+            </div>
+            </div>  
+
+                                                    
+            <div class="card" id="form14" style="display: none;">    
+                                               
+            <div class="card-body">                            
+                                            
+            <input type="checkbox" name="11th_class" value="">CLASS 11 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                                
+            </div> 
+            </div>  
+
+
+
+            <div class="card" id="form15" style="display: none;">   
+                                              
+            <div class="card-body">                             
+                                              
+            <input type="checkbox" name="12th_class" value="">CLASS 12 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                                                                  
+            </div>
+            </div>  
+
+                                    
+
+
+                  
+          </div><br><br>
+
+
+        <label>Type:-</label>  
+        <input type="checkbox" name="MessageType" value="0" onclick="handleCheckboxClick(0)">Fee Reminder &nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="MessageType" value="1" onclick="handleCheckboxClick(1)">Homework &nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="MessageType" value="2" onclick="handleCheckboxClick(2)">Classwork &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="MessageType" value="3" onclick="handleCheckboxClick(3)">Other &nbsp;&nbsp;&nbsp;&nbsp;<br><br> 
+
+
+        <textarea placeholder="compose"  name="Message"></textarea><br><br><br>     
+
+        <input type="submit" class="save-success-btn" value="Submit">          
+          
+        </form>   
+        
+      </div> 
+        
+
+        
+        <div class="col-md-3" style="background-color: #1e2442;color: white;">
+            <div class="box">
+                <h>Select the Fields</h><br><br> 
+                <input type="checkbox" name="all_teachers" value="all teachers" id="bt">ALL TEACHERS &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="all_students" value="all students" id="bt1">ALL STUDENTS &nbsp;&nbsp;&nbsp;<br><br>
+                <!-- <input type="checkbox" name="" value="all Parents" id="bt2">ALL PARENTS &nbsp;&nbsp;&nbsp;<br><br> -->
+                <input type="checkbox" name="1st_class" value="1st_class" id="bt4">CLASS 1 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="2nd_class" value="2nd_class" id="bt5">CLASS 2 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="3rd_class" value="3rd_class" id="bt6">CLASS 3 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="4th_class" value="4th_class" id="bt7">CLASS 4 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="5th_class" value="5th_class" id="bt8">CLASS 5 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="6th_class" value="6th_class" id="bt9">CLASS 6 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="7th_class" value="7th_class" id="bt10">CLASS 7 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="8th_class" value="8th_class" id="bt11">CLASS 8 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="9th_class" value="9th_class" id="bt3">CLASS 9 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="10th_class" value="10th_class" id="bt12">CLASS 10 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="11th_class" value="11th_class" id="bt13">CLASS 11 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+                <input type="checkbox" name="12th_class" value="12th_class" id="bt14">CLASS 12 ENTERY &nbsp;&nbsp;&nbsp;<br><br>
+ 
+            </div>
+        </div>
+        </div> 
+
+      
+        <script>
+          function handleCheckboxClick(checkboxIndex) {
+              var checkboxes = document.getElementsByName('MessageType');
+  
+              // Uncheck all checkboxes
+              for (var i = 0; i < checkboxes.length; i++) {
+                  if (i !== checkboxIndex) {
+                      checkboxes[i].checked = false; 
+                  } 
+              } 
+          } 
+        </script>  
+        
+
+        <script>
+            function toggleForm() {
+                var form = document.getElementById("myForm");
+                var btn = document.getElementById("toggleBtn");
+        
+                if (form.style.display === "none" || form.style.display === "") {
+                    form.style.display = "block";
+                    btn.innerHTML = "- Create Leave Type";
+                } else {
+                    form.style.display = "none";
+                    btn.innerHTML = "+ Create Leave Type";
+                }
+            }
+        </script> 
+
+
+        
+  <script>
+    $(document).ready(function(){
+    $('#form1').hide()
+    $('#bt').click(function(){
+    $('#form1').show()
+    $('#bt').hide()
+    $('#form1 input[name="all_teachers"]').prop('checked', true);
+    });
+    });
+    </script>  
+
+  <script>
+    $(document).ready(function(){
+    $('#form2').hide()
+    $('#bt1').click(function(){
+    $('#form2').show()
+    $('#bt1').hide()
+    $('#form2 input[name="all_students"]').prop('checked', true);  
+    });
+    });
+    </script>
+
+
+    <script>
+      $(document).ready(function(){
+      $('#form3').hide()
+      $('#bt2').click(function(){
+      $('#form3').show()
+      $('#bt2').hide()
+      $('#form3 input[name="Student"]').prop('checked', true);
+
+        
+      });
+      });
+      </script>  
+
+
+    <script>
+        $(document).ready(function(){
+        $('#form4').hide()
+        $('#bt3').click(function(){
+        $('#form4').show()
+        $('#bt3').hide()
+        $('#form4 input[name="9th_class"]').prop('checked', true);
+
+            
+        });
+        });
+        </script>  
+
+
+    <script>
+      $(document).ready(function(){
+      $('#form5').hide()
+      $('#bt4').click(function(){
+      $('#form5').show() 
+      $('#bt4').hide()
+      $('#form5 input[name="1st_class"]').prop('checked', true);
+
+
+      });
+    });
+    </script> 
+
+    
+    <script>
+      $(document).ready(function(){
+          $('#form6').hide()
+          $('#bt5').click(function(){
+            $('#form6').show()
+            $('#bt5').hide()
+            $('#form6 input[name="2nd_class"]').prop('checked', true);
+    
+    
+          });
+        });
+        </script> 
+
+      
+      <script>
+        $(document).ready(function(){
+            $('#form7').hide()
+            $('#bt6').click(function(){
+              $('#form7').show()
+              $('#bt6').hide()
+              $('#form7 input[name="3rd_class"]').prop('checked', true);
+      
+      
+            });
+          });
+          </script> 
+
+
+
+<script>
+  $(document).ready(function(){
+      $('#form8').hide()
+      $('#bt7').click(function(){
+        $('#form8').show()
+        $('#bt7').hide()
+        $('#form8 input[name="4th_class"]').prop('checked', true);
+
+
+      });
+    });
+    </script> 
+
+
+<script>
+  $(document).ready(function(){
+      $('#form9').hide()
+      $('#bt8').click(function(){
+        $('#form9').show()
+        $('#bt8').hide()
+        $('#form9 input[name="5th_class"]').prop('checked', true);
+
+
+      });
+    });
+    </script> 
+
+
+<script>
+  $(document).ready(function(){
+      $('#form10').hide()
+      $('#bt9').click(function(){
+        $('#form10').show()
+        $('#bt9').hide()
+        $('#form10 input[name="6th_class"]').prop('checked', true);
+
+
+      });
+    });
+    </script> 
+
+<script>
+  $(document).ready(function(){
+      $('#form11').hide()
+      $('#bt10').click(function(){
+        $('#form11').show()
+        $('#bt10').hide()
+        $('#form11 input[name="7th_class"]').prop('checked', true);
+
+
+      });
+    });
+    </script> 
+  
+  <script>
+    $(document).ready(function(){
+        $('#form12').hide()
+        $('#bt11').click(function(){
+          $('#form12').show()
+          $('#bt11').hide()
+          $('#form12 input[name="8th_class"]').prop('checked', true);
+  
+  
+        });
+      });
+      </script> 
+
+
+    
+    <script>
+      $(document).ready(function(){
+          $('#form13').hide()
+          $('#bt12').click(function(){
+            $('#form13').show()
+            $('#bt12').hide()
+            $('#form13 input[name="10th_class"]').prop('checked', true);
+    
+    
+          });
+        });
+        </script>  
+
+      
+<script>
+  $(document).ready(function(){
+      $('#form14').hide()
+      $('#bt13').click(function(){
+        $('#form14').show()
+        $('#bt13').hide()
+        $('#form14 input[name="11th_class"]').prop('checked', true);
+
+
+      });
+    });
+    </script> 
+
+
+
+
+  
+  <script>
+    $(document).ready(function(){
+        $('#form15').hide()
+        $('#bt14').click(function(){
+          $('#form15').show()
+          $('#bt14').hide()
+          $('#form15 input[name="12th_class"]').prop('checked', true);
+  
+  
+        });
+      });
+      </script>
+    
+
+              
+
+
+    <script>
+    $(document).ready(function(){
+        $('#form1').hide()
+        $('#btnn').click(function(){
+          $('#form1').hide()
+        });
+      });
+      </script>
+
+    <script>
+      $("#success").show();
+      setTimeout(function() {
+          $("#success").hide();
+      }, 5000);
+    </script>
+
+    <script>
+      $("#error").show();
+      setTimeout(function() {
+          $("#error ").hide();
+      }, 5000);
+    </script>
+
+    </body>
+</html>
+{% endblock main_content %}
+

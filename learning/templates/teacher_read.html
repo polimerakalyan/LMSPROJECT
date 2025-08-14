@@ -1,0 +1,117 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers data</title>
+    
+    <style>
+        h1 {
+    text-align: center;
+    font-size: 24px; /* Adjust font size as needed */
+    color: #333; /* Set color to your preference */
+    margin-bottom: 20px; /* Add spacing below the heading */
+}
+.table-responsive {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f2f2f2;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.data-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.data-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Teachers Data</h1>
+    <div class="table-responsive">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Registration No</th>
+                    <th>Organization</th>
+                    <th>Address</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                    <th>Date of Birth</th>
+                    <th>Qualification</th>
+                    <th>Subject</th>
+                    <th>Course</th>
+                    <th>Image</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Years of Experience</th>
+                    <th>Password</th>
+                    <th>Confirm Password</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data1 %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.registrationno}}</td>
+                    <td>{{i.organizationname}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.first_name}}</td>
+                    <td>{{i.last_name}}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.designation}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.dob}}</td>
+                    <td>{{i.qualification}}</td>
+                    <td>{{i.subject1}}</td>
+                    <td>{{i.course1}}</td>
+                    <td>{{i.image1}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.phoneno}}</td>
+                    <td>{{i.gender}}</td>
+                    <td>{{i.experiance}}</td>
+                    <td>{{i.password}}</td>
+                    <td>{{i.confirm_password}}</td>
+                    <td>
+                        <a href="{% url 'edit_teacher' i.id %}" class="btn btn-primary">Update</a>
+                        <a href="/teacher_delete/{{i.id}}/" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+{% endblock main_content %}

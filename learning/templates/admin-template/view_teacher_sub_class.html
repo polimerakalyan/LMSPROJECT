@@ -1,0 +1,157 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Class Subjects</title>
+    <style>
+        /* body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        } */
+
+        h2 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-left: 130px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #34495e;
+        }
+
+        #myInput {
+            background-image: url('/media/images/search-removebg-preview.png');
+            background-position: right;
+            background-repeat: no-repeat;
+            width: 30%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #34495e;
+            margin-bottom: 12px;
+            border-radius: 20px;
+            background-size: 45px;
+            color: #34495e;
+            margin-left: 130px;
+        }
+
+        .subject-cell {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .class-cell {
+            font-style: italic;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h2>View Class Subjects</h2>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Name, Registration no..." title="type name, Registration">
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Teacher</th>
+                <th>Registration no</th>
+                <th>Designation</th>
+                <th>Department</th>
+                <th>D.O.B</th>
+                <th>Qualification</th>
+           
+               
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Experience</th>
+                <th>Address</th>
+                <th>Subjects and classes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for group in grouped_data %}
+                <tr>
+                    <td>{{ group.teacher.first_name }} {{ group.teacher.last_name }}</td>
+                    <td>{{ group.teacher.organizationname }}</td>
+                    <td>{{group.teacher.designation}}</td>
+                    <td>{{group.teacher.department}}</td>
+                    <td>{{group.teacher.dob}}</td>
+                    <td>{{group.teacher.qualification}}</td>
+                    <td>{{group.teacher.email}}</td>
+                    <td>{{group.teacher.phoneno}}</td>
+                    <td>{{group.teacher.gender}}</td>
+                    <td>{{group.teacher.experiance}}</td>
+                    <td>{{group.teacher.address}}</td>
+
+                    <td>
+                        {% for subject_name, entries in group.entries_by_subject.items %}
+                            <span class="subject-cell">{{ subject_name }}</span>:
+                            <span class="class-cell">
+                                {% for entry in entries %}
+                                    {{ entry.class_name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </span><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, tdName, tdRegNo, i, txtValueName, txtValueRegNo;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tdName = tr[i].getElementsByTagName("td")[0];
+                tdRegNo = tr[i].getElementsByTagName("td")[1];
+                if (tdName && tdRegNo) {
+                    txtValueName = tdName.textContent || tdName.innerText;
+                    txtValueRegNo = tdRegNo.textContent || tdRegNo.innerText;
+                    if (txtValueName.toUpperCase().indexOf(filter) > -1 || txtValueRegNo.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock main_content %}

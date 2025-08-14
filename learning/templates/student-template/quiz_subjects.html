@@ -1,0 +1,13 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% for i in qu %}
+            <h5>{{i.subject.name}}
+            <a href="/std_quiz/{{i.subject_id}}" style="padding-left: 20px;"><button>Start Quiz</button></a></h5>
+
+        {% endfor %}
+
+    </body>
+</html>

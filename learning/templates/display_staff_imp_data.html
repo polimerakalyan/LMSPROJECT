@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>Display Staff Importance Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Staff Importance Data</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Main Heading</th>
+            <th>Image</th>
+            <th>Paragraph 1</th>
+            <th>Paragraph 2</th>
+            <th>Actions</th>
+
+        </tr>
+        {% for imp_member in staff_imp_data %}
+            <tr>
+                <td>{{ imp_member.id }}</td>
+                <td>{{ imp_member.main_heading }}</td>
+                <td>
+                    {% if imp_member.image %}
+                        <img src="{{ imp_member.image.url }}" alt="Staff Image" width="50">
+                    {% else %}
+                        No Image Available
+                    {% endif %}
+                </td>
+                <td>{{ imp_member.paragraph1 }}</td>
+                <td>{{ imp_member.paragraph2 }}</td>
+                <td>
+                    <a href="{% url 'edit_staff_imp_data' imp_member.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="{% url 'delete_staff_imp_data' imp_member.id %}">
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

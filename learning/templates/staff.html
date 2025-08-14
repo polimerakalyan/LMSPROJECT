@@ -1,0 +1,522 @@
+
+
+{% extends 'navheader.html' %}
+
+{% block main_content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Details</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h,h4{
+            color: #3058de;
+            text-align: center;
+        }
+
+        {% comment %} img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        } {% endcomment %}
+
+        p{
+            color: #333333;
+            {% comment %} text-align: justify; {% endcomment %}
+            margin-top: 95px;
+            margin-left: 90px;
+
+        }
+
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            {% comment %} flex-wrap: wrap; {% endcomment %}
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 18px;
+            width: 25%;
+            padding: 30px;
+            margin: 10px;
+            font-family: Arial, sans-serif;
+            transition: transform 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h4 {
+            color: #f35bc5;
+        }
+        h6{
+            color:black;
+        }
+
+        p1 {
+            color: #666;
+            margin-bottom: 10%; /* Adjust the margin to your preference */
+
+        }
+        .mhcard {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 1.3s ease-in-out;
+        }
+
+        .mhcard:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .mhcard h5 {
+            color: #007bff;
+        }
+
+        .mhcard ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .mhcard li {
+            margin-bottom: 10px;
+            font-size: 17px;
+            text-align: justify;
+        }
+
+        .mhcard-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .mhcard-hovered-more {
+            /* Add your hover styles here */
+            border: 2px solid rgba(236, 1, 158, 0.795); /* Example border color */
+        }
+        .mhcard {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.35s ease-in-out; /* Transition added for smoother effect */
+}
+
+.mhcard:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Change shadow on hover */
+}
+#p1{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                margin: 30px;
+
+            }
+            #p2{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                margin-top: 30px;
+                margin-bottom: 30px;
+
+            }
+            .card-container1 {
+    border: 1px solid #ccc;
+    border-radius: 15px; /* Adjust the border-radius value as needed */
+    margin-bottom: 20px;
+     height: auto;
+    padding: 10px;
+    transition: transform 0.3s;
+  }
+
+   /* CSS for hover effect */
+   .card-container1:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle box-shadow on hover */
+    transform: scale(1.02); /* Scale up the card slightly on hover */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add smooth transition */
+  }
+  #p3{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+
+            }
+
+
+
+            .card1{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                height:400px;
+                width: 290px;
+                margin-left: 25px;
+                margin-bottom: 5px;
+
+            }
+
+            .morecontent span {
+                display: none;
+              }
+              .morelink {
+                display: block;
+                color:lightcoral;
+              }
+              .card1:hover{
+                transform:scale(1.05)
+
+            }
+
+            #crd{
+                border:2px solid white;;
+                border-radius:25px;
+            }
+
+        h3{
+            padding: 20px;
+        }
+    </style> -->
+    <style>
+        #p1{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                margin: 90px;
+                /* width: 400px; */
+                margin-top: 30px;
+                margin-bottom: 30px;
+                margin: 2%;
+                
+                
+
+            }
+            #p2{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                margin-top: 30px;
+                margin-bottom: 30px;
+                margin: 2%;
+                
+               
+
+            }
+            .card-container1 {
+            border: 1px solid #ccc;
+    border-radius: 15px; /* Adjust the border-radius value as needed */
+    padding: 20px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    height: auto;
+    padding: 10px;
+    transition: transform 0.3s;
+    
+      overflow:hidden;
+      justify-content: space-around;
+      display: flex;
+      align-items: stretch;
+            }
+
+         #crd{
+                border:2px solid white;;
+                border-radius:25px;
+                max-width: 100%;
+                height: 400px;
+            }
+            .card-container1:hover {
+               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                transform:scale(1.05)
+            }
+            img{
+      max-width: 100%;
+      
+    }
+    body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+
+               }
+               #p3{
+                border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                
+
+            }
+
+
+
+            .card1{
+                /* border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                height:410px;
+                width: 450px;
+                margin-left: 25px;
+                margin-bottom: 5px; */
+                width: 90%; 
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin: 10px;
+                padding: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-left: 10px;
+               
+                height: 100%;
+                margin-bottom: 5px;
+
+            }
+            .card1:hover{
+                transform:scale(1.05)
+
+            }
+
+            .morecontent span {
+                display: none;
+                overflow: hidden;
+                position: relative;
+                height: 120px; 
+              }
+              .morelink {
+                display: block;
+                color:lightcoral;
+              }
+              @media screen and (max-width:1500px){
+  .card1{
+    width: 100%;
+  }
+}
+    </style>
+</head>
+<body>
+        <!-- <center>
+            {% for i in st %}
+            <h1 class="text-primary"><b>{{i.heading}}</b></h1>
+            {% endfor %}
+        </center> -->
+        <!-- <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for i in st %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <center><img src="{{i.image.url}}" width="100%" height="500px" id="crd"></center>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div> -->
+        <br>
+        <div>
+    {% for i in st  %}
+    {% if i.image %}
+    <img src="{{i.image.url}}" width="100%" height="400px" id="crd">
+    {% else %}
+    {% endif %}
+    {% endfor %}
+        </div><br><br>
+   
+
+            
+           <center>
+            {% for k in imp %}
+            <h3><b>{{ k.main_heading }}</b></h3><br>
+            {% endfor %}
+           </center>
+        <div class="container">
+            {% for k in imp %}
+              <div class="row d-flex justify-content-center align-items-center card-container1">
+                <div class="col-md-6">
+                  <!-- <h5 style="color: red;"><b>{{ k.main_heading }}</b></h5><br> -->
+                  <span style="text-align: justify; font-size: 18px;">{{ k.paragraph1 }}</span>
+                </div>
+                
+                <div class="col-md-5">
+                    <br>
+                  <img src="{{ k.image.url }}" width="350px" height="250px" id="p1" style="margin-left: 10px;">
+                </div>
+              </div>
+              
+              {% if k.image2 %}
+                <div class="row d-flex justify-content-center align-items-center card-container1">
+                  <div class="col-md-5">
+                    <img src="{{ k.image2.url }}" width="350px" height="250px" id="p2">
+                  </div>
+                  <div class="col-md-6">
+                    <br>
+                    <!-- <h5 style="color: red;"><b>{{ k.main_heading1 }}</b></h5><br> -->
+                    <span style="text-align: justify; font-size: 18px;">{{ k.paragraph2 }}</span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          
+
+
+
+
+    
+
+<!--<body>
+     <div class="card-container">
+        {% for k in p %}
+            <div class="card" onmouseover="hoverCard(this)" onmouseout="unhoverCard(this)">
+                <div class="container">
+                    <h4><b>{{ k.discription }}</b></h4>
+                    <p1 style="display: inline-block;">{{ k.p1 }}</p1>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+    <script defer>
+        function hoverCardMore(card) {
+            console.log('Hovered');
+            card.classList.add('mhcard-hovered-more');
+        }
+
+        function unhoverCardMore(card) {
+            console.log('Unhovered');
+            card.classList.remove('mhcard-hovered-more');
+        }
+    </script>
+
+<script>
+    // Function to move to the next slide
+    function nextSlide() {
+        $('#carouselExample').carousel('next');
+    }
+
+    // Set an interval to move to the next slide every 5000 milliseconds (5 seconds)
+    setInterval(nextSlide, 5000);
+</script>
+<script defer>
+    function hoverCardMore(card) {
+        console.log('Hovered');
+        card.classList.add('mhcard-hovered-more');
+    }
+
+    function unhoverCardMore(card) {
+        console.log('Unhovered');
+        card.classList.remove('mhcard-hovered-more');
+
+
+    }
+
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html> --> 
+<br><br>
+<center><h3 style="color: lightcoral;">WHAT ARE THE PROBLEMS ARE FACED IN STAFF MANAGEMENT SYSTEM</h3></center><br><br>
+    <div class="container-fluid">
+        <div class="row" style="font-size: 15px;">
+            {% for k in p %}
+            <div class="col-md-4" style="margin-bottom: 20px;"> <!-- Adjusted column width -->
+                <div class="card1">
+                    <center>
+                        <h3>
+                            <div class="more" style="color:black; ">
+                                {{k.heading}}
+                            </div>
+                        </h3>
+                    </center>
+                    {% if k.image %}
+                    <center><img src="{{k.image.url}}" style="height: 200px; width: 300px; margin-top: 10px" id="p3"></center><br>
+                    {% else %}
+                    {% endif %}
+                    <center>
+                        <div class="more" style="color:black;">
+                            {{k.discription}}
+                        </div>
+                    </center>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<br><br>
+  <script>
+  $(document).ready(function() {
+    var showChar = 90;
+    var ellipsestext = "...";
+    var moretext = "Show more";
+    var lesstext = "Show less";
+    $('.more').each(function() {
+      var content = $(this).html();
+      if(content.length > showChar) {
+        var c = content.substr(0, showChar);
+        var h = content.substr(showChar, content.length - showChar);
+        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+        $(this).html(html);
+      }
+    });
+    $(".morelink").click(function(){
+      if($(this).hasClass("less")) {
+        $(this).removeClass("less");
+        $(this).html(moretext);
+      } else {
+        $(this).addClass("less");
+        $(this).html(lesstext);
+      }
+      $(this).parent().prev().toggle();
+      $(this).prev().toggle();
+      return false;
+    });
+  });
+  </script>
+
+
+</body>
+</html>
+{% include 'footer_subjects.html' %}
+{% endblock main_content %}

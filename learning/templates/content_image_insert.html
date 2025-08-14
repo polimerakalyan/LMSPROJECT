@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>content_image</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+      <style>
+        form{
+            padding:20px;
+            margin-top: 20px;
+        }
+      </style>  
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="form-group">
+            <label>title1</label>
+            <input type="text" name="title1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>content1</label>
+            <input type="text" name="content1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>image1</label>
+            <input type="file" name="image1" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>title2</label>
+            <input type="text" name="title2" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>content2</label>
+            <input type="text" name="content2" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>image2</label>
+            <input type="file" name="image2" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>title3</label>
+            <input type="text" name="title3" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>content3</label>
+            <input type="text" name="content3" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>image3</label>
+            <input type="file" name="image3" class="form-control">
+        </div>
+        <input type="submit" class="btn btn-danger btn-block">
+
+    </form>
+</body>
+</html>

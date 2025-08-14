@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leave Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+    <style>
+        body {
+            color: white;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(21, 4, 58);
+            text-align: center;
+        }
+
+        /* Additional styles for mobile view */
+        @media screen and (max-width: 768px) {
+            /* Mobile styles here */
+        }
+
+        /* Add more of your custom CSS here */
+
+
+        body {
+  margin: 0px;
+  padding: 20px;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+  
+.checkbox-group-blocks {
+  ul {
+    list-style: none; 
+    
+    li {
+      display: inline-block;
+      height: 2em;
+      width: 100%;
+      max-width: 3em;
+      line-height: 2em;      
+      color: black;
+      text-align: center;
+      position: relative;
+      float: left;      
+      
+      label {
+        background-color: whitesmoke;
+        border: 1px solid black;
+        border-right: none;        
+        transition: all 0.1s ease-in-out;
+      }
+      
+      &:first-child {
+        label {
+          border-radius: 5px 0px 0px 5px;
+        }
+      }
+      
+      &:last-child {
+        label {
+          border-right: 1px solid black;
+          border-radius: 0px 5px 5px 0px;
+        }
+      }
+      
+      input[type="checkbox"] {
+        display: none;    
+        & + label {
+          cursor: pointer;
+          position: absolute;
+          line-height: inherit;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;          
+        }
+        
+        &:checked {
+          & + label {
+            background-color: orange;
+            color: white;
+            animation: push 0.2s 1 ease-out;  
+          }
+        }
+        
+          
+      }
+    }
+  }
+}
+
+
+.checkbox-group-blocks-label-wrap {
+  ul {
+    list-style: none; 
+
+    
+    li {
+      position: relative;
+      display: inline-block;
+      height: 2em;
+      width: 100%;
+      max-width: 3em;
+      line-height: 2em;      
+      color: black;
+      text-align: center;
+      position: relative;
+      float: left;     
+      
+      label {
+        position: absolute;
+        left: 0;
+        width: 100%;
+      }
+      
+      .label-text {
+        background-color: whitesmoke;
+        /* position: absolute; */
+        left: 0;
+        width: 100%;
+        border: 1px solid black;
+        border-right: none;        
+        user-select: none;
+        transition: all 0.1s ease-in-out;
+
+      }
+      
+      &:first-child {
+        .label-text {
+          border-radius: 5px 0px 0px 5px;
+        }
+      }
+      
+      &:last-child {
+        .label-text {
+          border-right: 1px solid black;
+          border-radius: 0px 5px 5px 0px;
+        }
+      }
+      
+      input[type="checkbox"] {
+        
+        /* //display: none;     */
+        & + .label-text {
+          cursor: pointer;
+          position: absolute;
+          line-height: inherit;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;          
+        }
+        
+        &:checked {
+          & + .label-text {
+            background-color: orange;
+            color: white;
+            animation: push 0.2s 1 ease-out;  
+          }
+        }
+        
+          
+      }
+    }
+  }
+}
+
+  
+  
+@keyframes push {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+    
+</style>
+</head>
+<body>
+    <form method="POST" action="/create_Teacher_shifts/">
+        {% csrf_token %}
+
+        <label style="font-size: 30px;">ADD SLOT</label><br><br>
+
+        <div class="form-group" style="width: 30%;margin-left: 35%;">
+          <label for="shift_name">slot_name:</label>
+            <select class="form-control" name="shift_name">
+              {% for i in k4 %}
+              <option value="{{i.name}}">{{i.name}}</option>
+              {% endfor %}
+
+          </select>
+            
+        </div><br>
+           
+                    
+          <div class="checkbox-group-blocks-label-wrap">
+            <label style="font-size: 25px; margin-right:20%" >Set off days*</label>
+            <ul style="margin-left:35%">
+              <li >
+                <label >
+                  <input type="checkbox" name="weekly_off" value="MON">
+                  <span class="label-text"  >MON</span>        
+                </label>
+              </li> 
+              <li>
+                <label>
+                  <input type="checkbox" name="weekly_off" value="TUE">
+                  <span class="label-text" >TUE</span>        
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="weekly_off" value="WED">
+                  <span class="label-text"  >WED</span>        
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="weekly_off" value="TUE">
+                  <span class="label-text" >THU</span>        
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="weekly_off" value="FRI">
+                  <span class="label-text"  >FRI</span>        
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="weekly_off" value="SAT">
+                  <span class="label-text"  >SAT</span>        
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="weekly_off" value="SUN">
+                  <span class="label-text" >SUN</span>        
+                </label>
+              </li>
+            </ul>  
+          </div><br>
+
+        <div>
+            <label style="font-size: 25px; margin-right:10%;">Set holiday calendar</label>
+            <p>You have not created school holiday calendar yet!<br> To create please click on the below button</p>
+        </div>          
+    
+
+        <button type="submit" style=" color: black; font-size: 20px; width:30%;"><a href="/addcalenlist/" style="text-decoration: none;">OPEN HOLIDAY CALANDER</a> </button><br><br><br>
+
+<div>
+        <label style="font-size: 25px; ">set slot time*</label>
+
+        <div class="row"  >
+          <div class="col-6" style="margin-left: 25%;" >
+            <label> CLOCK-IN TIME</label>
+            <input type="time" name="in_time">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>LATE-MARK TIME</label>
+            <input type="time" name="late_mark_time">          
+          </div>
+
+          <div class="col-6" style="margin-left: 25%;">
+            <label> CLOCK-OUT TIME</label>
+            <input type="time" name="out_time">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>DAY-HALF TIME</label>
+            <input type="time" name="half_daytime">
+          </div>
+
+        </div> 
+
+</div>  <br><br>
+
+
+
+<div class="form-group" style="width: 30%;margin-left: 35%;">
+  <label for="facult_name">ADD FACULTY:</label>
+            <select class="form-control " name="facult_name">
+              {% for i in k6 %}
+              <option value="{{i.first_name}}">{{i.first_name}}</option>
+              {% endfor %}
+
+          </select>
+
+
+</div><br><br>
+
+<button type="submit" style=" color: black; font-size: 20px; width:30%">CREATE SHIFT</button><br><br><br>
+
+
+</form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // JavaScript code for select-all-checkbox functionality, date pickers, and other interactions
+        });
+    </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const calendarContainers = document.querySelectorAll('.calendar-container');
+
+      calendarContainers.forEach(function(container) {
+          const dateInput = container.querySelector('.calendar-input');
+          const calendar = flatpickr(dateInput, {
+              dateFormat: "Y-m-d",
+          });
+
+          container.addEventListener('click', function() {
+              calendar.open();
+          });
+
+          // Update the input value before form submission
+          const form = container.closest('form');
+          if (form) {
+              form.addEventListener('submit', function() {
+                  const selectedDate = calendar.selectedDates[0];
+                  if (selectedDate) {
+                      const formattedDate = selectedDate.toISOString().split('T')[0];
+                      dateInput.value = formattedDate;
+                  }
+              });
+          }
+      });
+  });
+</script>
+
+<script>
+  const attendanceCheckbox = document.getElementById('attendanceCheckbox');
+  const attendanceEnabledInput = document.getElementById('attendanceEnabled');
+
+  attendanceCheckbox.addEventListener('change', function() {
+      if (attendanceCheckbox.checked) {
+          attendanceEnabledInput.value = 'yes';
+      } else {
+          attendanceEnabledInput.value = 'no';
+      }
+  });
+</script>
+
+
+
+
+
+    <script>
+        $(document).ready(function()
+        {
+            $('ch').click(function()
+            {
+                var txt="";
+                $('.ch:checked').each(function()
+                {
+                    txt+=$(this).val()+","
+                });
+                txt=txt.substring(0,txt.length-1);
+                $("#chl").val(txt);
+            });
+        });
+    </script>
+    <br><br><br>
+</body>
+</html>
+
+

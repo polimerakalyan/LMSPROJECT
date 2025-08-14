@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <style>
+        /* Reset CSS */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            height: 100%;
+        }
+
+        /* New styles for animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn ease-in-out 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            transform: translateY(20px);
+            animation: slideUp ease-in-out 0.8s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            background-color: white;
+            width: 100%; /* Adjust width as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .col {
+            flex: 1;
+            margin-right: 20px; /* Adjust margin as needed */
+        }
+
+        .header-image {
+            width: 90%;
+            height: auto;
+            object-fit: cover;
+            margin-top: 100px;
+            margin-left: -120px;
+        }
+
+        .form-title {
+            margin-top: 10px;
+            text-align: center;
+            color: #4caf50;
+        }
+
+        form {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .beside {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .btn2 {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: #4caf50;
+            font-size: 1rem;
+            transition: .3s;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: underline;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        select,
+        input[type="date"] {
+            border: none;
+            border-bottom: 1px solid black;
+            outline: none;
+            width: 100%; /* Adjust width as needed */
+            margin: 8px 0;
+            padding: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        input:hover {
+            background-color: #f0f0f0;
+        }
+
+        select {
+            width: 100%; /* Adjust width as needed */
+        }
+
+        button {
+            color: #ffffff;
+            background-color: #4caf50;
+            height: 40px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            border-radius: 2%;
+            outline: none;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #333333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                height: auto;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .col {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .header-image {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container fade-in">
+        <div class="content slide-up">
+            <div class="row">
+                <div class="col mt-3 mb-3 col-sm-12">
+                    <img src="https://colorlib.com/etc/regform/colorlib-regform-7/images/signup-image.jpg" alt="header-image" class="header-image">
+                </div>
+                <div class="col mt-3 mb-3 col-sm-12">
+                    <h1 class="form-title">Register Here</h1>
+                    <form method="post" action="{% url 'class_selection_view' %}">
+                        {% csrf_token %}
+                        <div class="beside">
+                            <input type="text" placeholder="Name" name="fullname" required>
+                            <input type="text" placeholder="Father's Name" name="fathername" required>
+                        </div>
+
+                        <div class="beside">
+                            <input type="text" placeholder="Username" name="username" required>
+                            <input type="email" placeholder="Email" name="email" required>
+                        </div>
+
+                        <div class="beside">
+                            <input type="password" placeholder="Password" name="password" required>
+                            <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+                        </div>
+
+                        <div class="beside">
+                            <select placeholder="Grade" name="selected_class" required>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                                <option value="11">Class 11</option>
+                                <option value="12">Class 12</option>
+                            </select>
+                            <input type="date" placeholder="Date of Birth" name="dob" required>
+                        </div>
+
+                        <div class="beside">
+                            <input type="number" placeholder="Phone" name="phonenumber" required>
+                            <select placeholder="Gender" name="gender" required>
+                                <option value="gender">Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="beside">
+                            <input type="text" placeholder="Address" name="address" required>
+                        </div>
+                        <button type="submit">Submit</button><br>
+                        <a href="{% url 'student2' %}" class="btn2">Back to home</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

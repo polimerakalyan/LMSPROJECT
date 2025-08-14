@@ -1,0 +1,186 @@
+
+
+{% extends 'navheader.html' %}
+
+{% block main_content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>examdisplay</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <style>
+        .morecontent span {
+            display: none;
+        }
+        .morelink {
+            display: block;
+            color: lightcoral;
+        }
+     
+        .mhcard {
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add initial box shadow */
+
+        }
+        .mhcard:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Add increased box shadow on hover */
+
+        }
+        /* Added CSS for rounded borders and hover effect */
+        .card1 {
+             /* border:2px solid azure;
+                border-radius:25px;
+                box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+                height:410px;
+                width: 450px;
+                margin-left: 25px;
+                margin-bottom: 5px; */
+                width: 100%; 
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin: 10px;
+                padding: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-left: 2px;
+                height: 100%;
+                margin-bottom: 5px;
+                
+        }
+        .card1:hover:hover {
+            transform: scale(1.05);
+        }
+        img{
+      max-width: 100%;
+        }
+        @media screen and (max-width:1000px){
+  .card1{
+    width: 100%;
+  }
+}
+#crd{
+                border:2px solid white;;
+                border-radius:25px;
+                max-width: 100%;
+                height: 400px;
+                
+            }
+    </style>
+</head>
+<body>
+    
+    <!-- <center>
+        <h2 style="color: orange; font-weight: bold;">Liveclass Management</h2>
+    </center> -->
+  
+    <!-- Display the first image from livecarousel -->
+    {% if livecarousel %}
+        {% if livecarousel.0.image2 %}
+            <img src="{{ livecarousel.0.image2.url }}" style="width: 100%; height: 400px;" id="crd">
+        {% endif %}
+    {% endif %}
+    <br><br><br>
+    <!-- Display the content cards -->
+    <div class="container">
+    {% for i in livemanag %}
+    <div class="container mhcard border rounded mb-4" style="height: 380;">
+        <div class="row" style="font-size: 18px;">
+            {% if i.image1 and i.image1.url %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <!-- Right Image and Left Content -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                        <div class="images" >
+                            <img src="{{ i.image1.url }}" style="width: 100%; height: 200px; margin-top:48px;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                        <div class="text">
+                            <h2 style="color: lightcoral;">🔸{{ i.heading }}</h2>
+                            <p>{{ i.content }}</p>
+                            <p>{{ i.content1 }}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Left Image and Right Content -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                        <div class="text">
+                            <h2 style="color: lightcoral;">🔸{{ i.heading }}</h2>
+                            <p>{{ i.content }}</p>
+                            <p>{{ i.content1 }}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                        <div class="images">
+                            <img src="{{ i.image1.url }}" style="width: 100%; height: 220px; margin-top:35px;">
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+        <br>
+    <!-- Display the cards from liveclassdisplay -->
+    <div class="container-fluid">
+        <div class="row" style="font-size: 15px;">
+            {% for i in liveclassdisplay %}
+            <div class="col-md-4" style="margin-bottom: 20px;"> <!-- Added margin-bottom for space between cards -->
+                <div class="card1">
+                    <center><h4 style="color: lightcoral;">Liveclass Management</h4></center>
+                    {% if i.image3 %}
+                        <center><img src="{{ i.image3.url }}" style="height: 200px; width: 350px;"></center>
+                    {% endif %}<br>
+                   <center> <div class="more" style="color: black;">
+                        {{ i.field }}
+                    </div></center>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <!-- jQuery -->
+    <script>
+        $(document).ready(function() {
+            var showChar = 100; 
+            var ellipsestext = "...";
+            var moretext = "Show more >";
+            var lesstext = "Show less";
+            
+            $('.more').each(function() {
+                var content = $(this).html();
+                if(content.length > showChar) {
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar, content.length - showChar);
+                    var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+                    $(this).html(html);
+                }
+            });
+            
+            $(".morelink").click(function(){
+                var $content = $(this).closest('.morecontent').find('span');
+                var $link = $(this);
+                if($link.hasClass("less")) {
+                    $link.removeClass("less");
+                    $link.html(moretext);
+                } else {
+                    $link.addClass("less");
+                    $link.html(lesstext);
+                }
+                $content.toggle();
+                $content.prev().toggle();
+                return false;
+            });
+        });
+    </script>
+        </body>
+</html>
+{% include 'footer_subjects.html' %}
+{% endblock main_content %}

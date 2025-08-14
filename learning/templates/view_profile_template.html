@@ -1,0 +1,88 @@
+{% extends 'hom4.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block main_content %}
+
+    <style>
+        table,tr,td{
+            border: none;
+            
+        }
+        td,th{
+            padding: 15px;
+            padding-left: 20px;
+            font-weight: bold;
+        }
+        table{
+            margin-top: 30px;
+            width: 100%;
+        }
+        tr:nth-child(even){
+        background-color: rgb(108, 108, 110);
+        color: rgba(255, 255, 255, 0.993);
+
+        }
+        tr:nth-child(odd){
+        background-color: #adabb3;
+        color: rgba(255, 255, 255, 0.993);
+
+        }
+        button{
+            background-color: rgb(255, 136, 0);
+            color:white;
+            padding: 5px;
+            width: 70px;
+            border-radius: 13px;            
+        }
+        h2{
+            color: rgb(15, 6, 134);
+            font-weight: bold;
+        }
+    </style>
+    <center><h2>Organization Profile</h2></center>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <table >
+                <tr>
+                    <th>Name of the Organization</th><td>{{ organization_profile.organizationname }}</td>
+                </tr>
+                <tr>
+                    <th>Registred Number</th><td>{{ organization_profile.registrationno }}</td>
+                </tr>
+                    <th>Name of the Admin</th><td>{{ organization_profile.first_name}}.{{ organization_profile.last_name }}</td>
+                <tr>
+                    <th>Email</th><td>{{ organization_profile.email }}</td>
+                </tr>
+                <tr>
+                    <th>Contact Number</th><td>{{ organization_profile.phoneno }}</td>
+                </tr>
+                <tr>
+                    <th>Total Strength</th><td>{{ organization_profile.strength }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th><td>{{ organization_profile.address }}</td>
+                </tr>
+                <tr>
+                    <th>Profile Pic</th><td><img src="{{organization_profile.image1.url}}" style="width: 100%;height: 300px;"></td>
+                </tr>
+
+            </table><br>
+            <a href="/retrieve"> 
+                <button>
+                    <i class="fa-solid fa-circle-arrow-left"></i>
+                    Back
+                </button>
+                </a>
+
+        </div>
+        <div class="col-3"></div>
+    </div>
+{% endblock main_content %}
+
+
+
+
+
+

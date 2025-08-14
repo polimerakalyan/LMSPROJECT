@@ -1,0 +1,220 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Registration Form</title>
+    
+</head>
+<style>
+
+      
+
+        .form-label {
+            font-weight: bold;
+  
+        }
+        .form-control {
+          border: 1px solid #5c6670;
+        
+        }
+        
+        .btn-primary {
+            background-color: #004080;                        
+            border: 1px solid #004080;                         
+        }
+
+        .btn-primary:hover {
+            background-color: #001a33;                        
+            border: 1px solid #001a33;                         
+        }
+
+        .btn-danger {
+            background-color: #ff6666;                         
+            border: 1px solid #ff6666;                         
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000;                         
+            border: 1px solid #cc0000;                         
+        }
+</style>
+<body>
+
+    <div class="container" style="margin-right: 100px;">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="col-xl-12 col-xxl-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center><h3>Teacher Registration Form</h3></center>
+                    </div>
+                    {% if message %}
+                    <div class="alert alert-success mt-3" style="color: green;" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <form action="#" method="post">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label class="form-label">Staff Type</label>
+                                  <select class="form-control" name="staff_type">
+                                    <option value="" disabled selected>---Select Staff Type </option>
+                                    <option value="Teaching">Teaching</option>
+                                    <option value="Non-Teaching">Non-Teaching</option>
+                                  </select>
+                                </div>
+                              </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="Organization Name">Organization Name</label>
+                                        <input id="organizationname"  name="organizationname" placeholder="Enter Organization" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                      <label class="form-label" for="Enter_Registration No">Registration No</label>
+                                      <input id="registrationno"  name="registrationno" placeholder="Enter Registration No" type="number" class="form-control" required>
+                                  </div>
+                              </div>
+
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="username">User Name</label>
+                                      <input id="username" name="username" placeholder="username" type="text" class="form-control" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                        <label class="form-label" for="Email">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email"   required>
+                                      </div>
+                                  </div>
+                               
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="first_name">First Name</label>
+                                      <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="last_name">Last Name</label>
+                                      <input id="last_name"  type="text" name="last_name" class="form-control" required>
+                                    </div>
+                                  </div>
+                                  <!-- <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label">Class</label>
+                                      <select class="form-control" name="className"> 
+                                        <option value="" disabled selected>---select class----</option>
+                                        {% for i in classes %}
+                                        <option value="{{i.id}}">{{i.classes}}</option>
+                                        {% endfor %}
+                                      </select>
+                                    </div>
+                                  </div> -->
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label">Gender</label>
+                                      <select class="form-control" name="gender">
+                                        <option value="" disabled selected>---select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="designation">Designation</label>
+                                      <input id="designation" type="text"  name="designation" class="form-control" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="department">Department</label>
+                                      <input id="department" name="department" type="text" class="form-control" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="dob">Date of Birth</label>
+                                      <input id="dob" name="dob" type="date" name="dob" class="form-control" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="qualification">Qualification</label>
+                                      <input type="text"  class="form-control" id="qualification" name="qualification" required>
+                                    </div>
+                                  </div>
+                                 
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="phoneno">Phone No</label>
+                                      <input type="number"  class="form-control" id="phoneno" name="phoneno" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="experiance">Experience</label>
+                                      <input type="number"  class="form-control" id="experiance" name="experiance" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="Password">Password</label>
+                                      <input type="password" class="form-control" id="password" name="password" required>
+
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="experiance">Confirm Password</label>
+                                      <input type="password"  class="form-control" id="confirm_password" name="confirm_password" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" for="photo">Image</label>
+                                      <input type="file"  class="form-control" id="photo" name="photo" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label">Shift Name</label>
+                                      <select class="form-control" name="shift_name">
+                                        <option value="" disabled selected>---select Shift Name</option>
+                                        {% for i in k5 %}
+                                        <option value="{{i.name}}">{{i.name}}</option>
+                                        {% endfor %}
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                      <label class="form-label" for="Address">Address</label>
+                                      <textarea id="Address" name="address" placeholder="Address" class="form-control" rows="5" required></textarea>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+{% endblock main_content %}

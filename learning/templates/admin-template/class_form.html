@@ -1,0 +1,190 @@
+{% extends 'admin-template/adminsidebar.html' %}
+{% block main_content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Fee Payment Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+                
+        .container th, .container td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .container tr:hover {
+            background-color: #070607;
+        }
+        .container {
+            padding: 20px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        #student_class:hover, #amount:hover {
+            transform: scale(1.03);
+        }
+        #terms:hover{
+            transform: scale(1.03);
+        }
+        .container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .container th, .fee-container td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .container tr:hover {
+            background-color: #5b3086; /* Change background color on hover */
+        }
+        #student_class option {
+        font-size: 15px; 
+        padding: 1px; 
+        width:50px;
+        }
+        .container .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .container .col {
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        
+        h2 {
+            text-align: center;
+            color: rgb(9, 9, 9);
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <form method="post" onsubmit="return validateForm()">
+
+    <div class="container">
+        <h2>Student Fee Form</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post" onsubmit="return validateForm()">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col">
+                    <label for="student_class">Class Name:<span class="text-danger">*</span></label>
+                    
+                    <select class="form-control" id="student_class" name="student_class" required>
+                        <option value=""> ---Select Your Class-- </option>
+                        {% for class_option in student_classes %}  
+                            <option value="{{ class_option }}">{{ class_option }}</option>
+                        {% endfor %}
+                    </select>
+                    <i class="fas fa-caret-down position-absolute" style="top: 70%; right: 20px; transform: translateY(-50%); cursor: pointer;"></i>
+                </div>
+                <div class="col">
+                    <label for="amount">Amount:<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="amount" name="amount" oninput="calculateTerms()" placeholder="Enter The Amount" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="terms">Terms:<span class="text-danger">*</span></label>
+                    <select class="form-control" id="terms" name="terms" onchange="calculateTerms()" required>
+                        <option value="">---Select Number of Terms---</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <i class="fas fa-caret-down position-absolute" style="top: 70%; right: 20px; transform: translateY(-50%);"></i>
+                </div>
+                <div class="col">
+                    <label for="term1">Term1:</label>
+                    <input type="text" class="form-control" id="term1" name="term1" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="term2">Term2:</label>
+                    <input type="text" class="form-control" id="term2" name="term2" readonly>
+                </div>
+                <div class="col">
+                    <label for="term3">Term3:</label> 
+                    <input type="text" class="form-control" id="term3" name="term3" readonly>  
+                </div>
+            </div><div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary">Submit Payment</button>
+                </div>
+            </div>
+        </form>               
+    </div>
+
+    <script>
+        function calculateTerms() {
+            var amount = parseFloat(document.getElementById('amount').value);
+            var terms = parseFloat(document.getElementById('terms').value);
+
+            if (!isNaN(amount) && !isNaN(terms) && terms !== 0) {
+                var termAmount = amount / terms;
+                for (var i = 1; i <= 3; i++) {
+                    if (i <= terms) {
+                        document.getElementById('term' + i).value = termAmount.toFixed(2);
+                    } else {
+                        document.getElementById('term' + i).value = "";
+                    }
+                }
+            } else {
+                for (var i = 1; i <= 3; i++) {
+                    document.getElementById('term' + i).value = "";
+                }
+            }
+            if (terms == 1) {
+                document.getElementById('term2').value = "0.00";
+                document.getElementById('term3').value = "0.00";
+            } else if (terms == 2) {
+                document.getElementById('term3').value = "0.00";
+    }
+        }
+function validateForm() {
+            var studentClass = document.getElementById('student_class').value;
+            var amount = document.getElementById('amount').value;
+            var terms = document.getElementById('terms').value;
+
+            if (studentClass === "" || amount === "" || terms === "") {
+                alert("Please fill out all required fields.");
+                return false;
+            }
+            return true;
+            
+        }
+    </script>
+</body>
+</html>
+
+</script>
+
+
+
+{% endblock main_content %} 
+

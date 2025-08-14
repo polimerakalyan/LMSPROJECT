@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>dis</title>
+        <meta charset="UTF-8">             
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            p,h2{
+                margin-left:10%;
+                margin-right:10%;
+                
+            }
+            a{
+                text-decoration:none;
+                font-size: 19px;
+               
+            }     
+             .chaps{
+                background-color: white; font-weight: bold; border-radius: 30px; padding-bottom: 2px; font-family: 'Times New Roman', Times, serif; padding-left: 7%; padding-top: 5px;
+            }             
+            a{
+                font-size:19px;
+            } 
+            
+        </style>
+    </head>
+    <body>
+      <nav class="navbar " style="background-color: #7a6ad8;">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" style="background-color: white; border-radius: 5px; padding: 4px;" href="/home">LMS</a>
+          </div>        
+          <div class="collapse navbar-collapse" id="myNavbar">                        
+          </div>
+        </div>
+      </nav>
+        <br>
+      
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-8">
+        {% for i in res %}
+            <h2>{{i.intro}}</h2>
+            <p style="font-size: medium;">{{i.description}}</p>
+            {% endfor %}
+          </div>
+          <div class="col-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <hr><br>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-1"></div> 
+  
+      <div class="col-7" >
+
+        <h3 style="padding-top: 10px; margin-left: 30px; "> Chapters List</h3>
+
+            <div  class="chaps">
+
+              {% for i in res %}
+
+          <ul style="list-style: none;">
+
+            <li>
+              <a href="/chapter/{{i.id}}/{{i.subid}}/{{i.classid}}" style="font-size: medium;">{{i.chaptername | title}} </a>     
+            </li>
+          </ul>
+
+              {% endfor %} 
+        </div>   
+
+      </div> 
+
+      <div class="col-3"></div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
+  

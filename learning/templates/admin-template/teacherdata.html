@@ -1,0 +1,58 @@
+
+<html>
+    <head>
+        <style>
+            body{
+                display: block;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+        
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+        
+            th {
+                background-color: #4CAF50;
+                color:white;
+                text-align: center;
+            }
+        
+            td a {
+                display: inline-block;
+                margin-right: 5px;
+                padding: 5px 10px;
+                text-decoration: none;
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 3px;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>first name</th>
+                    <th>last name</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for plan in plans %}
+                    <tr>
+                        <td>{{ plan.first_name }}</td>
+                        <td>{{ plan.last_name }}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

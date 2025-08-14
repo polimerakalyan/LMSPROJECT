@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz questions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard-all/ckeditor.js"></script>
+</head>
+<body>  
+    
+  <div class="container">
+    <form method="post"  id="filter-form">{% csrf_token %}
+        <h1 class="p-4"><center direction="right">Add Questions</center></h1>
+        {%for msg in messages%}
+        <div class="alert alert-success" role="alert">
+          {{msg}}
+          </div>
+          {%endfor%}
+            <div id="req_input" class="datainputs">
+                <div class="required_inp">
+                    <div class="row">
+                       
+                        <div class="col">
+                            <label for="organizationname">question</label>
+                            <textarea cols="10" id="editor1" name="question" rows="10" data-sample-short>
+
+                            </textarea>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="registrationno">choice1</label>
+                            <textarea cols="10" id="editor2" name="choice1" rows="10" data-sample-short>
+
+                            </textarea>
+                            
+                            
+                        </div>
+                        <div class="col">
+                            <label for="address">choice2</label>
+                            <textarea cols="10" id="editor3" name="choice2" rows="10" data-sample-short>
+
+                            </textarea>
+                        </div>
+                        <div class="col">
+                            <label for="username">choice3</label>
+                            <textarea cols="10" id="editor4" name="choice3" rows="10" data-sample-short>
+
+                            </textarea>
+                        </div>
+                        <div class="col">
+                            <label for="first_name">choice4</label>
+                            <textarea cols="10" id="editor5" name="choice4" rows="10" data-sample-short>
+
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="gender">correct Answer</label>
+                            <select class="form-control custom-select" name="is_correct">
+                            <option value="" disabled selected style="text-align: center;">--------Select Answer--------</option>
+                            <option value="choice1">choice1</option>
+                            <option value="choice2">choice2</option>
+                            <option value="choice3">choice3</option>
+                            <option value="choice4">choice4</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label >class </label>
+                            <select class="form-control "name="class_name">
+                                <option value="{{k0.class_name.id}}">{{k0.class_name.classes}} class</option>
+                            </select>
+                         
+                        </div>
+                        <div class="col">
+                            <label >subject id</label>
+                            <select class="form-control "name="subject">
+                                <option value="{{k0.subject.id}}">{{k0.subject.name}}</option>
+                            </select>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+           <br>
+           
+        <button type="submit" class="btn btn-success btn-block">Submit</button>
+        
+    </form>
+   
+    <script>
+        (function() {
+          var mathElements = [
+            'math',
+            'maction',
+            'maligngroup',
+            'malignmark',
+            'menclose',
+            'merror',
+            'mfenced',
+            'mfrac',
+            'mglyph',
+            'mi',
+            'mlabeledtr',
+            'mlongdiv',
+            'mmultiscripts',
+            'mn',
+            'mo',
+            'mover',
+            'mpadded',
+            'mphantom',
+            'mroot',
+            'mrow',
+            'ms',
+            'mscarries',
+            'mscarry',
+            'msgroup',
+            'msline',
+            'mspace',
+            'msqrt',
+            'msrow',
+            'mstack',
+            'mstyle',
+            'msub',
+            'msup',
+            'msubsup',
+            'mtable',
+            'mtd',
+            'mtext',
+            'mtr',
+            'munder',
+            'munderover',
+            'semantics',
+            'annotation',
+            'annotation-xml'
+          ];
+    
+          CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.14.0/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
+    
+          CKEDITOR.replace('editor1', {
+            extraPlugins: 'ckeditor_wiris',
+            removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+            height: 320,
+            extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+          });
+        }());
+      </script>
+    
+    <script>
+        (function() {
+          var mathElements = [
+            'math',
+            'maction',
+            'maligngroup',
+            'malignmark',
+            'menclose',
+            'merror',
+            'mfenced',
+            'mfrac',
+            'mglyph',
+            'mi',
+            'mlabeledtr',
+            'mlongdiv',
+            'mmultiscripts',
+            'mn',
+            'mo',
+            'mover',
+            'mpadded',
+            'mphantom',
+            'mroot',
+            'mrow',
+            'ms',
+            'mscarries',
+            'mscarry',
+            'msgroup',
+            'msline',
+            'mspace',
+            'msqrt',
+            'msrow',
+            'mstack',
+            'mstyle',
+            'msub',
+            'msup',
+            'msubsup',
+            'mtable',
+            'mtd',
+            'mtext',
+            'mtr',
+            'munder',
+            'munderover',
+            'semantics',
+            'annotation',
+            'annotation-xml'
+          ];
+    
+          CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.14.0/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
+    
+          CKEDITOR.replace('editor2', {
+            extraPlugins: 'ckeditor_wiris',
+            removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+            height: 100,
+            extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+          });
+        }());
+      </script>
+      <script>
+        (function() {
+          var mathElements = [
+            'math',
+            'maction',
+            'maligngroup',
+            'malignmark',
+            'menclose',
+            'merror',
+            'mfenced',
+            'mfrac',
+            'mglyph',
+            'mi',
+            'mlabeledtr',
+            'mlongdiv',
+            'mmultiscripts',
+            'mn',
+            'mo',
+            'mover',
+            'mpadded',
+            'mphantom',
+            'mroot',
+            'mrow',
+            'ms',
+            'mscarries',
+            'mscarry',
+            'msgroup',
+            'msline',
+            'mspace',
+            'msqrt',
+            'msrow',
+            'mstack',
+            'mstyle',
+            'msub',
+            'msup',
+            'msubsup',
+            'mtable',
+            'mtd',
+            'mtext',
+            'mtr',
+            'munder',
+            'munderover',
+            'semantics',
+            'annotation',
+            'annotation-xml'
+          ];
+    
+          CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.14.0/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
+    
+          CKEDITOR.replace('editor3', {
+            extraPlugins: 'ckeditor_wiris',
+            removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+            height: 100,
+            extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+          });
+        }());
+      </script>
+      <script>
+        (function() {
+          var mathElements = [
+            'math',
+            'maction',
+            'maligngroup',
+            'malignmark',
+            'menclose',
+            'merror',
+            'mfenced',
+            'mfrac',
+            'mglyph',
+            'mi',
+            'mlabeledtr',
+            'mlongdiv',
+            'mmultiscripts',
+            'mn',
+            'mo',
+            'mover',
+            'mpadded',
+            'mphantom',
+            'mroot',
+            'mrow',
+            'ms',
+            'mscarries',
+            'mscarry',
+            'msgroup',
+            'msline',
+            'mspace',
+            'msqrt',
+            'msrow',
+            'mstack',
+            'mstyle',
+            'msub',
+            'msup',
+            'msubsup',
+            'mtable',
+            'mtd',
+            'mtext',
+            'mtr',
+            'munder',
+            'munderover',
+            'semantics',
+            'annotation',
+            'annotation-xml'
+          ];
+    
+          CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.14.0/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
+    
+          CKEDITOR.replace('editor4', {
+            extraPlugins: 'ckeditor_wiris',
+            removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+            height: 100,
+            extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+          });
+        }());
+      </script>
+      <script>
+        (function() {
+          var mathElements = [
+            'math',
+            'maction',
+            'maligngroup',
+            'malignmark',
+            'menclose',
+            'merror',
+            'mfenced',
+            'mfrac',
+            'mglyph',
+            'mi',
+            'mlabeledtr',
+            'mlongdiv',
+            'mmultiscripts',
+            'mn',
+            'mo',
+            'mover',
+            'mpadded',
+            'mphantom',
+            'mroot',
+            'mrow',
+            'ms',
+            'mscarries',
+            'mscarry',
+            'msgroup',
+            'msline',
+            'mspace',
+            'msqrt',
+            'msrow',
+            'mstack',
+            'mstyle',
+            'msub',
+            'msup',
+            'msubsup',
+            'mtable',
+            'mtd',
+            'mtext',
+            'mtr',
+            'munder',
+            'munderover',
+            'semantics',
+            'annotation',
+            'annotation-xml'
+          ];
+    
+          CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.14.0/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
+    
+          CKEDITOR.replace('editor5', {
+            extraPlugins: 'ckeditor_wiris',
+            removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+            height: 100,
+            extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+          });
+        }());
+      </script>
+     
+  
+</body>
+</html>
+
