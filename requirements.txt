@@ -18,6 +18,7 @@ djangorestframework
 django-mathfilters
 django-ckeditor
 django-requests
+django-google
 
 
 
