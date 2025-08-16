@@ -1,18 +1,18 @@
-# Use a lightweight Python image
-FROM python:3.11-slim
+# Use official Python image
+FROM python:3.11
 
 # Set working directory
 WORKDIR /app
 
-# Install dependencies without cache
+# Copy requirements.txt first and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy only application code
+# Copy all project files
 COPY . .
 
-# Expose port (if needed)
+# Expose Django default port
 EXPOSE 8000
 
-# Run the application
-CMD ["python", "app.py"]
+# Run the app using Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
