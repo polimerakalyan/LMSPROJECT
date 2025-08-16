@@ -4,16 +4,15 @@ FROM python:3.11
 # Set working directory
 WORKDIR /app
 
-# Copy requirements and install
+# Copy requirements.txt first and install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the project files
+# Copy all project files
 COPY . .
 
-# Expose Django port
+# Expose Django default port
 EXPOSE 8000
 
-# Run Django app with Gunicorn (better than runserver for production)
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "lms_main.wsgi:application"]
+# Run the app using Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
