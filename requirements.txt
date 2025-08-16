@@ -17,6 +17,7 @@ python-dotenv
 djangorestframework
 django-mathfilters
 django-ckeditor
+django-requests
 
 
 
