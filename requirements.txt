@@ -18,7 +18,10 @@ djangorestframework
 django-mathfilters
 django-ckeditor
 django-requests
-django-google
+google-auth==2.22.0
+google-api-python-client==2.98.0  
+
+
 
 
 
