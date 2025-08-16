@@ -16,6 +16,8 @@ pymysql==1.1.0
 python-dotenv
 djangorestframework
 django-mathfilters
+django-ckeditor
+
 
 
 
