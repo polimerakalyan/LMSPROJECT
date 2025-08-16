@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lms-app
+  labels:
+    app: lms-app
 spec:
   replicas: 2
   selector:
@@ -16,6 +18,4 @@ spec:
       - name: lms-app
         image: 242201276768.dkr.ecr.us-east-1.amazonaws.com/lms-app:latest
         ports:
-        - containerPort: 8000
-      imagePullSecrets:
-      - name: ecr-reg-cred
+        - containerPort: 8000   # change if your Django runs on different port
