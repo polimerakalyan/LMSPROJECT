@@ -14,5 +14,7 @@ tzdata==2025.2
 urllib3==2.4.0
 pymysql==1.1.0
 python-dotenv
+djangorestframework
+
 
 
