@@ -6,7 +6,6 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host:   # replace with your domain (GoDaddy, Route53, etc.)
     http:
       paths:
       - path: /
