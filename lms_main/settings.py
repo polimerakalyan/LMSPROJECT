@@ -186,16 +186,28 @@ CKEDITOR_CONFIGS = {
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'lms1231',
+#         'HOST': 'mysql-service',
+#         'PORT': '3306',
+#         'USER': 'root',
+#         'PASSWORD': 'rootpassword', 
+       
+# }}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lms1231',
-        'HOST': 'mysql-service',
+        'NAME': 'lmsdb',             # must match MYSQL_DATABASE
+        'HOST': 'mysql-service',     # service name
         'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'rootpassword', 
-       
-}}
+        'USER': 'lmsuser',           # must match MYSQL_USER
+        'PASSWORD': 'lmspassword',   # must match MYSQL_PASSWORD
+    }
+}
+
+
 
 
 # DATABASES = {
