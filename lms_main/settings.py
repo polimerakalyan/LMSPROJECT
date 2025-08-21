@@ -193,7 +193,7 @@ DATABASES = {
         'HOST': 'mysql-service',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': 'kalyan5@1997K', 
+        'PASSWORD': 'rootpassword', 
        
 }}
 
