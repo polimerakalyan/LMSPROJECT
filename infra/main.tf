@@ -24,13 +24,14 @@ module "eks" {
   subnet_ids      = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
 
-  managed_node_groups = {
-    eks_nodes = {
-      desired_size   = 2
-      max_size       = 3
-      min_size       = 1
-
-      instance_types = ["t3.medium"]
-    }
+  eks_managed_node_groups = {
+  example = {
+    desired_size   = 2
+    max_size       = 3
+    min_size       = 1
+    instance_types = ["t3.medium"]
+    capacity_type  = "ON_DEMAND"
   }
+}
+
 }
