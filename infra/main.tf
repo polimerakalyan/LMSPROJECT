@@ -24,14 +24,17 @@ module "eks" {
   subnet_ids      = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
 
-  eks_managed_node_groups = {
-  example = {
-    desired_size   = 2
-    max_size       = 3
-    min_size       = 1
-    instance_types = ["t3.medium"]
-    capacity_type  = "ON_DEMAND"
-  }
-}
+  cluster_endpoint_public_access  = true   # 👈 Allow public endpoint
+  cluster_endpoint_private_access = true   # 👈 Keep private access for security
+  cluster_endpoint_public_access_cidrs = ["<your-public-ip>/32"]  # 👈 Restrict to you
 
+  eks_managed_node_groups = {
+    example = {
+      desired_size   = 2
+      max_size       = 3
+      min_size       = 1
+      instance_types = ["t3.medium"]
+      capacity_type  = "ON_DEMAND"
+    }
+  }
 }
