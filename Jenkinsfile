@@ -54,17 +54,6 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh '''
-                kubectl apply -f mysql-pvc.yaml
-                kubectl apply -f mysql.yaml
-                kubectl apply -f deployment.yaml
-                kubectl apply -f service.yaml
-                kubectl apply -f ingress.yaml
-                '''
-            }
-        }
     }
 }
 
