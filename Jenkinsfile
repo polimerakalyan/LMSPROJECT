@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         AWS_REGION = "us-east-1"
-        AWS_ACCOUNT_ID = "242201276768"
+        AWS_ACCOUNT_ID = "887194768979"
         ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/lms-app"
     }
 
