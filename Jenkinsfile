@@ -88,6 +88,7 @@ pipeline {
                 ]]) {
                     sh '''
                     aws eks --region us-east-1 update-kubeconfig --name my-eks-cluster
+                    kubectl apply -f mysql.yaml
                     kubectl apply -f deployment.yaml
                     kubectl apply -f service.yaml
                     '''
