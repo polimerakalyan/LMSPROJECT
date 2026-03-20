@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: lms-app
-        image: 242201276768.dkr.ecr.us-east-1.amazonaws.com/lms-app:latest
+        image: 887194768979.dkr.ecr.us-east-1.amazonaws.com/lms-app
         ports:
         - containerPort: 8000   # change if your Django runs on different port
