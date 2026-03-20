@@ -80,6 +80,16 @@ pipeline {
                 sh 'docker push $ECR_REPO:latest'
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                kubectl apply -f deployment.yaml
+                kubectl apply -f service.yaml
+                kubectl apply -f ingress.yaml
+                '''
+            }
+        }
+
 
     }
 }
